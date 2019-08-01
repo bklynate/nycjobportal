@@ -1,0 +1,8 @@
+// Prod.js
+// Remember to add these Config vars on Heroku before deploying
+export default {
+  googleClientID: process.env.GOOGLE_CLIENT_ID,
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  cookieKey: process.env.COOKIE_KEY,
+  mongoURI: process.env.MONGODB_URI,
+};
