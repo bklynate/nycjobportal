@@ -9,12 +9,14 @@
   "scripts": {
     "start": "npm run prod:buildserver; node ./server/server-dist/",
     "server": "nodemon ./server/index.js --exec babel-node",
-    "prod:buildserver": "rm -rf ./server/server-dist && babel ./server -d ./server/server-dist --copy-files",
+    "prod:buildserver":
+      "rm -rf ./server/server-dist && babel ./server -d ./server/server-dist --copy-files",
     "client": "npm run start --prefix client",
     "audit": "npm audit fix && cd client/ && npm audit fix && cd ..",
     "getAll": "npm i && cd client/ && npm i && cd ..",
     "dev": "concurrently --raw --kill-others \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild":
+      "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
