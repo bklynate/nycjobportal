@@ -5,6 +5,7 @@ import passport from 'passport';
 import mongoose from 'mongoose';
 
 import authRoutes from './routes/authRoutes';
+import jobRoutes from './routes/jobsApi';
 import keys from './config/keys';
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(passport.session());
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl);
 authRoutes(app);
+jobRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express serves up production build assets
