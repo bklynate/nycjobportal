@@ -14,21 +14,21 @@ class Header extends Component {
       case null:
         return;
       case false:
-        return <a href='/auth/google'>Log in with Google</a>;
+        return <a href="/auth/google">Log in with Google</a>;
       default:
-        return <a href='/api/logout'>Logout</a>;
+        return <a href="/api/logout">Logout</a>;
     }
   }
 
   render() {
     return (
       <nav>
-        <div className='header nav-wrapper'>
-          <Link to={this.props.auth ? '/' : '/'} className='left brand-logo'>
+        <div className="header nav-wrapper">
+          <Link to={this.props.auth ? '/' : '/'} className="left brand-logo">
             Boilerplate
           </Link>
-          <ul className='right header-right'>
-            <li className='header-right-content'>{this.renderContent()}</li>
+          <ul className="right header-right">
+            <li className="header-right-content">{this.renderContent()}</li>
           </ul>
         </div>
       </nav>

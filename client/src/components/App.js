@@ -17,14 +17,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className='container-fluid'>
+      <div className="container-fluid">
         <BrowserRouter>
           <div>
             <Header />
-            <div className='container'>
+            <div className="container">
               <Switch>
-                <Route exact path='/' component={LandingPage} />
-                <Route exact path='*' component={NotFound404} />
+                <Route exact path="/" component={LandingPage} />
+                <Route exact path="*" component={NotFound404} />
               </Switch>
             </div>
           </div>
