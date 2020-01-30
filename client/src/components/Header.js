@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-class Header extends Component {s
+class Header extends Component {
   isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
