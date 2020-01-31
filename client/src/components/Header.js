@@ -8,7 +8,7 @@ class Header extends Component {
     return Object.keys(obj).length === 0;
   }
 
-  renderContent() {
+  renderSignInContent() {
     const { auth } = this.props;
     switch (!this.isEmpty(auth)) {
       case null:
@@ -25,10 +25,10 @@ class Header extends Component {
       <nav>
         <div className="header nav-wrapper">
           <Link to={this.props.auth ? '/' : '/'} className="left brand-logo">
-            Boilerplate
+            NYC Job Portal
           </Link>
           <ul className="right header-right">
-            <li className="header-right-content">{this.renderContent()}</li>
+            <li className="header-right-content">{this.renderSignInContent()}</li>
           </ul>
         </div>
       </nav>
