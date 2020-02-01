@@ -4,13 +4,17 @@ export default app => {
   app.get(
     '/auth/google',
     passport.authenticate('google', {
-      scope: [ 'profile', 'email' ],
-    }),
+      scope: ['profile', 'email'],
+    })
   );
 
-  app.get('/auth/google/callback', passport.authenticate('google'), (request, response) => {
-    response.redirect('/');
-  });
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (request, response) => {
+      response.redirect('/');
+    }
+  );
 
   app.get('/api/logout', (request, response) => {
     request.logout();
