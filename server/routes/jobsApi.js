@@ -12,11 +12,15 @@ export default app => {
 
   app.post('/api/getjobbykeyword', async (request, response) => {
     const { keyword = 'javascript' } = request.body;
-    const apiResponse = await axios(
-      `https://data.cityofnewyork.us/resource/kpav-sd4t.json/?$$app_token=${keys.APIKEY}&&${encodeURI(
-        `$query=select * search '${keyword}' limit 100&$$query_timeout_seconds=60`
-      )}`
+
+    const APISearchQuery = encodeURI(
+      `$query=SELECT * where POSTING_TYPE = 'External' search '${keyword}' limit 100&$$query_timeout_seconds=60`
     );
+
+    const apiResponse = await axios(
+      `https://data.cityofnewyork.us/resource/kpav-sd4t.json/?$$app_token=${keys.APIKEY}&&${APISearchQuery}`
+    );
+
     const { data = {} } = apiResponse || {};
     response.send({ data });
   });
