@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "8.11.3"
+    "node": "12.14.1"
   },
   "scripts": {
     "start": "npm run prod:buildserver; node ./server/server-dist/",
