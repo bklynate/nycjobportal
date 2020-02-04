@@ -4,22 +4,33 @@ This web application is built with Create React App and other various tooling li
 
 ## Installation
 
-Clone the repo locally  
+Clone the repo locally
 `git clone https://github.com/bklynate/nycjobportal.git` for https
 
-or  
+or
 
 `git clone git@github.com:bklynate/nycjobportal.git` for SSH
 
 You'll need to run `npm i` or run `yarn` in both the client and root folders as they both have a `package.json`.
 
-To run locally, you'll also need to setup API Keys for Google inside a file you'll create example: `server/config/dev.js`
-```bash
-      clientID: 'Some key here'
-      clientSecret: 'Some key here'
-      cookieKey: 'Some key here'
-      ...
+After installation of dependencies, within root folder, execute within the commandline: `npm run dev` to start development and view application.
+
+***
+
+## Authentication Setup
+
+To run locally, you'll also need to setup API Keys for Google inside a file you'll create example:
+`server/config/dev.js`
+
+```json
+{
+  googleClientID: 'Some key here'
+  googleClientSecret: 'Some key here'
+}
+
 ```
+
+*For more information on generating Google API keys follow the following guide*: [Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/protocols/OAuth2)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
