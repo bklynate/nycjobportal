@@ -9,6 +9,10 @@ import LandingPage from './LandingPage';
 const NotFound404 = () => <h2>PAGE NOT FOUND</h2>;
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+
   render() {
     return (
       <div className="container-fluid">
