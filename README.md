@@ -30,7 +30,7 @@ To run locally, you'll also need to setup API Keys for Google inside a file you'
 
 ```
 
-*For more information on generating Google API keys follow the following guide*: [Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/protocols/OAuth2)
+*For more information on generating Google API keys follow the following guide*: [Using OAuth 2.0 to Access Google APIs](https://support.google.com/googleapi/answer/6158849?hl=en&ref_topic=7013279)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
