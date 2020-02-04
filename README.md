@@ -11,6 +11,14 @@ You'll need to run `npm i` or run `yarn` in both the client and root folders as 
 
 After installation of dependencies, within root folder, execute within the commandline: `npm run dev` to start development and view application.
 
+Ensure that `mongodb` is installed locally and started:
+
+```
+brew tap mongodb/brew
+brew install mongodb-community
+brew services start mongodb/brew/mongodb-community
+```
+
 ***
 
 ## Authentication Setup
