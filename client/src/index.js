@@ -9,8 +9,13 @@ import './styles/styles.css';
 
 import reducers from './reducers';
 import App from './components/App';
+import { ajaxMiddleware } from './middleware';
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const middleware = [
+  thunk,
+  ajaxMiddleware
+];
+const store = createStore(reducers, {}, applyMiddleware(...middleware));
 
 ReactDOM.render(
   <Provider store={store}>
