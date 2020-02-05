@@ -7,11 +7,11 @@ This web application is built with Create React App and other various tooling li
 Clone the repo locally
 `git clone https://github.com/bklynate/nycjobportal.git` for https or `git clone git@github.com:bklynate/nycjobportal.git` for SSH
 
-You'll need to run `npm i` or run `yarn` in both the client and root folders as they both have a `package.json`.
+Within the root folder, you may run `npm run getAll` to install dependencies for both client and root folders. This is the equivalent/alternative to running `npm i` or run `yarn` in both the client and root folders as they both have a `package.json`.
 
 After installation of dependencies, within root folder, execute within the commandline: `npm run dev` to start development and view application.
 
-Ensure that `mongodb` is installed locally and started:
+Ensure that `mongodb` is installed locally and started (macOs with homebrew):
 
 ```
 brew tap mongodb/brew
@@ -23,13 +23,19 @@ brew services start mongodb/brew/mongodb-community
 
 ## Authentication Setup
 
-To run locally, you'll also need to setup API Keys for Google inside a file you'll create example:
+**Links**
+
+* [NYC Open Data: NYC Jobs Data Set](https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t)
+
+To run locally, you'll also need to setup API Keys for Google and NYC OpenData and place inside a file you'll create:
 `server/config/dev.js`
 
 ```json
 {
   googleClientID: 'Some key here'
-  googleClientSecret: 'Some key here'
+  googleClientSecret: 'Some key here',
+  clientID: 'Some key here',
+  clientSecret: 'Some key here'
 }
 
 ```
