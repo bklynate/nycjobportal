@@ -26,6 +26,8 @@ brew services start mongodb/brew/mongodb-community
 **Links**
 
 * [NYC Open Data: NYC Jobs Data Set](https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t)
+* [Socrata Authentication](https://dev.socrata.com/docs/authentication.html)
+* [Socrata API Endpoints](https://dev.socrata.com/docs/endpoints.html)
 
 To run locally, you'll also need to setup API Keys for Google and NYC OpenData and place inside a file you'll create:
 `server/config/dev.js`
