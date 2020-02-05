@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@chakra-ui/core';
 
 const JobResultItem = props => {
   const {
@@ -12,13 +13,15 @@ const JobResultItem = props => {
   } = props.data;
   return (
     <div style={{ border: '1px solid red', marginBottom: '10px' }}>
-      <p>{agency}</p>
-      <p>{business_title}</p>
-      <p>{civil_service_title}</p>
-      <p>{division_work_unit}</p>
-      <p>{full_time_part_time_indicator}</p>
-      <p>{job_category}</p>
-      <p>{work_location}</p>
+      <Box>
+        <p>{agency}</p>
+        <p>{business_title}</p>
+        <p>{civil_service_title}</p>
+        <p>{division_work_unit}</p>
+        <p>{full_time_part_time_indicator}</p>
+        <p>{job_category}</p>
+        <p>{work_location}</p>
+      </Box>
     </div>
   );
 };
