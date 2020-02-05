@@ -15,7 +15,7 @@ export default app => {
 
   app.post('/api/getjobbykeyword', async (req, res) => {
     try {
-      const { keyword = 'javascript' } = request.body;
+      const { keyword } = req.params;
       const response = await axios(
         `https://data.cityofnewyork.us/resource/kpav-sd4t.json/?$$app_token=${
           keys.APIKEY
