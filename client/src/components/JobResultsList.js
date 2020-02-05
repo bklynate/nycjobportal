@@ -2,13 +2,13 @@ import React from 'react';
 import JobResultItem from './JobResultItem';
 import { connect } from 'react-redux';
 
-const _renderJob = (job, index) => <JobResultItem key={index} data={job} />;
+const renderJob = (job, index) => <JobResultItem key={index} data={job} />;
 
 const JobsResultsList = props => {
   return (
     <div>
       <h1>Hi</h1>
-      {props.allJobs.map(_renderJob)}
+      {props.allJobs.map(renderJob)}
     </div>
   );
 };
