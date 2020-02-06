@@ -6,9 +6,9 @@ import {
   FETCH_ALL_JOBS_START,
   FETCH_ALL_JOBS_SUCCESS,
   FETCH_ALL_JOBS_FAILED,
-  FETCH_KEYWORD_JOBS_START,
-  FETCH_KEYWORD_JOBS_SUCCESS,
-  FETCH_KEYWORD_JOBS_FAILED,
+  FETCH_JOBS_BY_KEYWORD_START,
+  FETCH_JOBS_BY_KEYWORD_SUCCESS,
+  FETCH_JOBS_BY_KEYWORD_FAILED,
 } from './types';
 
 export const fetchUser = () => ({
@@ -37,10 +37,10 @@ export const fetchKeywordJobs = (keyword = '') => ({
   url: '/api/getjobbykeyword',
   method: 'post',
   params: { keyword },
-  onStart: FETCH_KEYWORD_JOBS_START,
+  onStart: FETCH_JOBS_BY_KEYWORD_START,
   onSuccess: response => ({
-    type: FETCH_KEYWORD_JOBS_SUCCESS,
+    type: FETCH_JOBS_BY_KEYWORD_SUCCESS,
     payload: response.data,
   }),
-  onFailure: FETCH_KEYWORD_JOBS_FAILED,
+  onFailure: FETCH_JOBS_BY_KEYWORD_FAILED,
 });
