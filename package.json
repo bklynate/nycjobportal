@@ -16,7 +16,8 @@
     "getAll": "npm i && cd client/ && npm i && cd ..",
     "dev": "concurrently --raw --kill-others \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "lint": "eslint \"./**/*.{js,jsx}\" --quiet"
+    "lint": "eslint \"./**/*.{js,jsx}\" --quiet",
+    "test-server": "jest \"server/.*\\.test\\.js\""
   },
   "author": "",
   "license": "ISC",
@@ -51,6 +52,7 @@
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.2",
+    "jest": "^25.1.0",
     "npm-check": "^5.9.0",
     "prettier": "^1.19.1"
   }
