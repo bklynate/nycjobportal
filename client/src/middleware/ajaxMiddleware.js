@@ -47,7 +47,7 @@ export const ajaxMiddleware = () => next => async action => {
   processStep(next, onStart);
 
   try {
-    const response = await axios[method](url, {params});
+    const response = await axios[method](url, params);
     processStep(next, onSuccess, response);
   } catch (error) {
     processStep(next, onFailure, error);
