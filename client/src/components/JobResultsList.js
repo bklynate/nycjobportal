@@ -8,14 +8,14 @@ const JobsResultsList = props => {
   return (
     <div>
       <h1>Hi</h1>
-      {props.allJobs.map(renderJob)}
+      {props.searchJobKeywords.map(renderJob)}
     </div>
   );
 };
 
 const mapStateToProps = state => {
-  const { allJobs } = state.jobs;
-  return { allJobs };
+  const { searchJobKeywords } = state.jobs;
+  return { searchJobKeywords };
 };
 
 export default connect(mapStateToProps)(JobsResultsList);
