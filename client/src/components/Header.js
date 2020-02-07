@@ -4,20 +4,19 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Header extends Component {
-  isEmpty(obj) {
-    return Object.keys(obj).length === 0;
+  determineIfUserIsAuthenticated(user) {
+    if (user === null) return false;
+    if (user === undefined) return false;
+    return !(Object.keys(user).length === 0);
   }
 
   renderSignInContent() {
     const { auth } = this.props;
-    switch (!this.isEmpty(auth)) {
-      case null:
-        return;
-      case false:
-        return <a href="/auth/google">Log in with Google</a>;
-      default:
-        return <a href="/api/logout">Logout</a>;
-    }
+    const { user } = auth;
+    const isUserAuthenticated = this.determineIfUserIsAuthenticated(user);
+
+    if (isUserAuthenticated) return <a href="/api/logout">Logout</a>;
+    return <a href="/auth/google">Log in with Google</a>;
   }
 
   render() {
@@ -28,7 +27,9 @@ class Header extends Component {
             NYC Job Portal
           </Link>
           <ul className="right header-right">
-            <li className="header-right-content">{this.renderSignInContent()}</li>
+            <li className="header-right-content">
+              {this.renderSignInContent()}
+            </li>
           </ul>
         </div>
       </nav>

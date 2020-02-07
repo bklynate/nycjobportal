@@ -11,15 +11,12 @@ import reducers from './reducers';
 import App from './components/App';
 import { ajaxMiddleware } from './middleware';
 
-const middleware = [
-  thunk,
-  ajaxMiddleware
-];
+const middleware = [thunk, ajaxMiddleware];
 const store = createStore(reducers, {}, applyMiddleware(...middleware));
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.querySelector('#root'),
+  document.querySelector('#root')
 );
