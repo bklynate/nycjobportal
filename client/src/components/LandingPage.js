@@ -5,8 +5,8 @@ import JobResultsList from './JobResultsList';
 const LandingPage = () => (
   <div>
     <h1>Landing Page</h1>
-    <JobResultsList />
     <Form />
+    <JobResultsList />
   </div>
 );
 
