@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box, Badge, Text } from '@chakra-ui/core';
 
 const JobResultItem = props => {
   const {
@@ -10,19 +10,31 @@ const JobResultItem = props => {
     full_time_part_time_indicator,
     job_category,
     work_location,
+    posting_type,
   } = props.data;
+
   return (
-    <div style={{ border: '1px solid red', marginBottom: '10px' }}>
-      <Box>
-        <p>{agency}</p>
-        <p>{business_title}</p>
-        <p>{civil_service_title}</p>
-        <p>{division_work_unit}</p>
-        <p>{full_time_part_time_indicator}</p>
-        <p>{job_category}</p>
-        <p>{work_location}</p>
+    <Box
+      w="400px"
+      rounded="20px"
+      boxShadow="sm"
+      border="1px"
+      borderColor="gray.500"
+      mb={5}
+    >
+      <Box p={5}>
+        <Badge p={2} variant="outline">
+          {posting_type}
+        </Badge>
+        <Text>{agency}</Text>
+        <Text>{business_title}</Text>
+        <Text>{civil_service_title}</Text>
+        <Text>{division_work_unit}</Text>
+        <Text>{full_time_part_time_indicator}</Text>
+        <Text>{job_category}</Text>
+        <Text>{work_location}</Text>
       </Box>
-    </div>
+    </Box>
   );
 };
 
