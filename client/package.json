@@ -26,7 +26,6 @@
     "emotion-theming": "^10.0.27",
     "eslint": "^6.8.0",
     "eslint-config-react-app": "^5.2.0",
-    "eslint-plugin-flowtype": "^4.6.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.2",
@@ -96,9 +95,6 @@
       "jsx",
       "node"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",

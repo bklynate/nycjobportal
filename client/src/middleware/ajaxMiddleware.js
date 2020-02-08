@@ -21,18 +21,14 @@ const requiredProperties = [
 ];
 
 const processStep = (next, step, payload = null) => {
-  switch (true) {
-    case typeof step === 'string':
-      return next({ type: step, payload });
-    case typeof step === 'object':
-      return next({ payload, ...step });
-    case typeof step === 'function':
-      return next(step(payload));
-    default:
-      return;
-  }
+  if (typeof step === 'string') return next({ type: step, payload });
+  if (typeof step === 'object') return next({ payload, ...step });
+  if (typeof step === 'function') return next(step(payload));
+  /* eslint-disable-next-line */
+  return;
 };
 
+/* eslint-disable-next-line */
 export const ajaxMiddleware = () => next => async action => {
   if (
     !(

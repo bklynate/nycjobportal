@@ -8,9 +8,10 @@ const renderJobItems = job => (
 );
 
 const JobsResultsList = props => {
+  const { searchJobKeywords } = props;
   return (
     <Flex flexDirection="row" wrap="wrap" justify="space-between" my={6}>
-      {props.searchJobKeywords.map(renderJobItems)}
+      {searchJobKeywords.map(renderJobItems)}
     </Flex>
   );
 };

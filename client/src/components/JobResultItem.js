@@ -2,16 +2,18 @@ import React from 'react';
 import { Box, Badge, Text } from '@chakra-ui/core';
 
 const JobResultItem = props => {
+  const { data } = props;
+
   const {
     agency,
-    business_title,
-    civil_service_title,
-    division_work_unit,
-    full_time_part_time_indicator,
-    job_category,
-    work_location,
-    posting_type,
-  } = props.data;
+    posting_type: postingType,
+    business_title: businessTitle,
+    civil_service_title: civilServiceTitle,
+    division_work_unit: divisionWorkUnit,
+    full_time_part_time_indicator: fullTimePartTimeIndicator,
+    job_category: jobCategory,
+    work_location: workLocation,
+  } = data;
 
   return (
     <Box
@@ -24,15 +26,15 @@ const JobResultItem = props => {
     >
       <Box p={5}>
         <Badge p={2} variant="outline">
-          {posting_type}
+          {postingType}
         </Badge>
         <Text>{agency}</Text>
-        <Text>{business_title}</Text>
-        <Text>{civil_service_title}</Text>
-        <Text>{division_work_unit}</Text>
-        <Text>{full_time_part_time_indicator}</Text>
-        <Text>{job_category}</Text>
-        <Text>{work_location}</Text>
+        <Text>{businessTitle}</Text>
+        <Text>{civilServiceTitle}</Text>
+        <Text>{divisionWorkUnit}</Text>
+        <Text>{fullTimePartTimeIndicator}</Text>
+        <Text>{jobCategory}</Text>
+        <Text>{workLocation}</Text>
       </Box>
     </Box>
   );

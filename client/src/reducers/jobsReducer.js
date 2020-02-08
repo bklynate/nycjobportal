@@ -4,8 +4,8 @@ import {
   FETCH_ALL_JOBS_FAILED,
   FETCH_JOBS_BY_KEYWORD_START,
   FETCH_JOBS_BY_KEYWORD_SUCCESS,
-  FETCH_JOBS_BY_KEYWORD_FAILED
-} from './../actions/types';
+  FETCH_JOBS_BY_KEYWORD_FAILED,
+} from '../actions/types';
 
 const initialState = {
   isLoading: false,
