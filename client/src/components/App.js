@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import * as actions from './../actions';
+import * as actions from '../actions';
 
 import Header from './Header';
 import LandingPage from './LandingPage';
@@ -10,7 +10,8 @@ const NotFound404 = () => <h2>PAGE NOT FOUND</h2>;
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchUser();
+    const { fetchUser } = this.props;
+    fetchUser();
   }
 
   render() {

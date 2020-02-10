@@ -17,6 +17,11 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'jsx-a11y/no-autofocus': 'off',
     'no-unused-vars': 2,
+    'react/state-in-constructor': 0,
+    'react/button-has-type': 0,
+    'class-methods-use-this': 0,
+    'react/jsx-props-no-spreading': 1,
+    'react/jsx-curly-newline': 1,
   },
 
   globals: {

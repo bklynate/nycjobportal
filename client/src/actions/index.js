@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   FETCH_USER_START,
   FETCH_USER_SUCCESS,
