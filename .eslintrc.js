@@ -15,11 +15,12 @@ module.exports = {
     'react/jsx-uses-vars': 2,
     'no-underscore-dangle': 'off',
     'import/no-named-as-default': 'off',
-    'jsx-a11y/no-autofocus': 'off'
+    'jsx-a11y/no-autofocus': 'off',
+    'no-unused-vars': 2,
   },
 
   globals: {
     __CLIENT__: true,
-    __DEVTOOLS__: true
-  }
+    __DEVTOOLS__: true,
+  },
 };
