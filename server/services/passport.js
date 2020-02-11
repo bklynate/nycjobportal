@@ -3,7 +3,7 @@
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import mongoose from 'mongoose';
-import clientKeys from './../config/keys';
+import clientKeys from '../config/keys';
 
 const User = mongoose.model('users');
 
@@ -32,6 +32,6 @@ passport.use(
       }
       const newUser = await new User({ googleID: profile.id }).save();
       done(null, newUser);
-    },
-  ),
+    }
+  )
 );

@@ -1,25 +1,42 @@
 import React from 'react';
+import { Box, Badge, Text } from '@chakra-ui/core';
 
 const JobResultItem = props => {
+  const { data } = props;
+
   const {
     agency,
-    business_title,
-    civil_service_title,
-    division_work_unit,
-    full_time_part_time_indicator,
-    job_category,
-    work_location,
-  } = props.data;
+    posting_type: postingType,
+    business_title: businessTitle,
+    civil_service_title: civilServiceTitle,
+    division_work_unit: divisionWorkUnit,
+    full_time_part_time_indicator: fullTimePartTimeIndicator,
+    job_category: jobCategory,
+    work_location: workLocation,
+  } = data;
+
   return (
-    <div style={{ border: '1px solid red', marginBottom: '10px' }}>
-      <p>{agency}</p>
-      <p>{business_title}</p>
-      <p>{civil_service_title}</p>
-      <p>{division_work_unit}</p>
-      <p>{full_time_part_time_indicator}</p>
-      <p>{job_category}</p>
-      <p>{work_location}</p>
-    </div>
+    <Box
+      w="400px"
+      rounded="20px"
+      boxShadow="sm"
+      border="1px"
+      borderColor="gray.500"
+      mb={5}
+    >
+      <Box p={5}>
+        <Badge p={2} variant="outline">
+          {postingType}
+        </Badge>
+        <Text>{agency}</Text>
+        <Text>{businessTitle}</Text>
+        <Text>{civilServiceTitle}</Text>
+        <Text>{divisionWorkUnit}</Text>
+        <Text>{fullTimePartTimeIndicator}</Text>
+        <Text>{jobCategory}</Text>
+        <Text>{workLocation}</Text>
+      </Box>
+    </Box>
   );
 };
 

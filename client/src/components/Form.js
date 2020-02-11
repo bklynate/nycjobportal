@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from './../actions';
+import * as actions from '../actions';
 
 class Form extends Component {
   state = {
@@ -14,10 +14,13 @@ class Form extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.fetchKeywordJobs(this.state.jobTitle);
+    const { fetchKeywordJobs } = this.props;
+    const { jobTitle } = this.state;
+    fetchKeywordJobs(jobTitle);
   };
 
   render() {
+    const { jobTitle } = this.state;
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -26,7 +29,7 @@ class Form extends Component {
             autoFocus
             onChange={this.onInputChange}
             placeholder="Enter a keyword to search for jobs"
-            value={this.state.jobTitle}
+            value={jobTitle}
           />
           <button className="waves-effect waves-light btn">Search Jobs</button>
         </form>
