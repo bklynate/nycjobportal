@@ -4,22 +4,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { BrowserRouter } from 'react-router-dom';
+import './public/styles/styles.css';
+import { ajaxMiddleware } from './middleware';
 import thunk from 'redux-thunk';
-import { ThemeProvider } from '@chakra-ui/core';
-import './styles/styles.css';
 
 import reducers from './reducers';
 import App from './components/App';
-import { ajaxMiddleware } from './middleware';
 
 const middleware = [thunk, ajaxMiddleware];
-const store = createStore(reducers, {}, applyMiddleware(...middleware));
+export const store = createStore(reducers, {}, applyMiddleware(...middleware));
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider>
+    <BrowserRouter>
       <App />
-    </ThemeProvider>
+    </BrowserRouter>
   </Provider>,
-  document.querySelector('#root')
+  document.getElementById('#root')
 );

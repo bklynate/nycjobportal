@@ -1,11 +1,15 @@
 {
-  "presets": ["env","stage-0", "react"],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    ["transform-runtime", {
-      "polyfill": false,
-      "regenerator": true
-    }]
-  ]
+    "@babel/plugin-proposal-class-properties",
+    "css-modules-transform"
+  ],
+  "env": {
+    "server": {
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "css-modules-transform"
+      ]
+    }
+  }
 }
