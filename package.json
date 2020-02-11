@@ -17,7 +17,7 @@
     "dev": "concurrently --raw --kill-others \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "lint": "eslint \"./**/*.{js,jsx}\" --quiet",
-    "test-server": "jest \"server/.*\\.test\\.js\""
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +33,29 @@
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "server/**/*.{js,jsx}"
+    ],
+    "testMatch": [
+      "<rootDir>/server/**/**/__tests__/**/*.js?(x)",
+      "<rootDir>/server/**/**/?(*.)(spec|test).js?(x)",
+      "<rootDir>/server/**/?(*.)(spec|test).js"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
