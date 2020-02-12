@@ -1,5 +1,7 @@
 import app from './../jobsApi.js';
 
-test('t', () => {
-  expect(1).toBe(true)
-})
+describe('jobsApi.js', () => {
+  test('it should be type object', () => {
+    expect(typeof app).toBe('function')
+  });
+});
