@@ -35,29 +35,6 @@
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0"
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "server/**/*.{js,jsx}"
-    ],
-    "testMatch": [
-      "<rootDir>/server/**/**/__tests__/**/*.js?(x)",
-      "<rootDir>/server/**/**/?(*.)(spec|test).js?(x)",
-      "<rootDir>/server/**/?(*.)(spec|test).js"
-    ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ]
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -88,11 +65,11 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+      "<rootDir>/server>/**/*.js"
     ],
     "testMatch": [
       "<rootDir>/server/**/**/__tests__/**/*.js?(x)",
-      "<rootDir>/server/**/**/?(*.)(spec|test).js?(x)"
+      "<rootDir>/server/routes/tests/*.test.js?(x)"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
