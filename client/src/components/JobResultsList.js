@@ -1,21 +1,24 @@
 import React from 'react';
-import JobResultItem from './JobResultItem';
 import { connect } from 'react-redux';
+import { Flex } from '@chakra-ui/core';
+import JobResultItem from './JobResultItem';
 
-const renderJob = (job, index) => <JobResultItem key={index} data={job} />;
+const renderJobItems = job => (
+  <JobResultItem key={`${job.job_id}-${job.posting_type}`} data={job} />
+);
 
 const JobsResultsList = props => {
+  const { searchJobKeywords } = props;
   return (
-    <div>
-      <h1>Hi</h1>
-      {props.allJobs.map(renderJob)}
-    </div>
+    <Flex flexDirection="row" wrap="wrap" justify="space-between" my={6}>
+      {searchJobKeywords.map(renderJobItems)}
+    </Flex>
   );
 };
 
 const mapStateToProps = state => {
-  const { allJobs } = state.jobs;
-  return { allJobs };
+  const { searchJobKeywords } = state.jobs;
+  return { searchJobKeywords };
 };
 
 export default connect(mapStateToProps)(JobsResultsList);

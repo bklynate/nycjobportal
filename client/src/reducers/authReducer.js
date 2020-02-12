@@ -2,7 +2,7 @@ import {
   FETCH_USER_START,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILED,
-} from './../actions/types';
+} from '../actions/types';
 
 const initialState = {
   isLoading: false,
