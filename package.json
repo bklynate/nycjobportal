@@ -67,12 +67,9 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.js?(x)",
-      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+      "<rootDir>/server/**/**/__tests__/**/*.js?(x)",
+      "<rootDir>/server/**/**/?(*.)(spec|test).js?(x)"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
