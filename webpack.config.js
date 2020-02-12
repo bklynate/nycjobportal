@@ -4,10 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  entry: [
-    path.join(__dirname, '/client/src/index.js'),
-    path.join(__dirname, '/server/index.js'),
-  ],
+  entry: path.join(__dirname, 'src/index.js'),
   output: {
     path: path.join(__dirname, '/dist/'),
     filename: 'bundle.js',
@@ -23,6 +20,12 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -70,7 +73,7 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: './client/src/public/index.html',
+      template: path.join(__dirname, 'src/public/index.html'),
       filename: 'index.html',
     }),
   ],

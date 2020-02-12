@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import ReactRouter from 'react-router-dom';
-import { store } from './../client/src/index';
 import createTemplate from 'lodash.template';
+
 import compression from 'compression';
 import fs from 'fs';
 import path from 'path';
@@ -13,13 +13,16 @@ import cookieSession from 'cookie-session';
 import passport from 'passport';
 import mongoose from 'mongoose';
 
-import App from '../client/src/components/App';
+import store from '../src/store';
+import App from '../src/components/App';
+
 import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobsApi';
-import keys from './config/keys';
+
+import { cookieKey } from './config/keys';
 
 const app = express();
-const StaticRouter = ReactRouter.StaticRouter;
+const { StaticRouter } = ReactRouter;
 const { PORT = 5000 } = process.env;
 const clientIndexHTMLPath = path.join(__dirname, '..', 'dist', 'index.html');
 const baseTemplate = fs.readFileSync(clientIndexHTMLPath);
@@ -29,13 +32,14 @@ const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/bp_db';
 require('./models/User');
 require('./services/passport');
 
-app.use('/dist', express.static('dist'));
+app.use(compression());
+app.use('/dist', express.static('../dist'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey],
+    keys: [cookieKey],
   })
 );
 app.use(passport.initialize());
@@ -47,7 +51,6 @@ jobRoutes(app);
 
 app.use((req, res) => {
   const context = {};
-  const store = createStore({});
   const body = ReactDOMServer.renderToString(
     React.createElement(
       Provider,
