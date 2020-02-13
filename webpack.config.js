@@ -2,18 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-console.log('Hello --- ', path.join(__dirname, 'src/index.js'));
-
-module.exports = {
+const config = {
   context: __dirname,
-  entry: {
-    main: [path.join(__dirname, 'src/index.js')],
-  },
+  entry: [
+    path.join(__dirname, 'src', 'index.js'),
+    path.join(__dirname, 'src', 'styles.css'),
+  ],
   output: {
-    path: path.join(__dirname, 'src/dist/'),
+    path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
-    publicPath: './src/dist/',
+    publicPath: path.resolve(__dirname, '/dist'),
   },
   devtool: 'cheap-eval-source-map',
   resolve: {
@@ -37,30 +37,20 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
         },
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.css$/,
         use: [
           {
             loader: 'style-loader',
           },
           {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          {
             loader: 'css-loader',
-          },
-          {
-            loader: 'postcss-loader',
             options: {
-              plugins: () => [require('autoprefixer')()],
+              modules: true,
             },
           },
-          'sass-loader',
         ],
       },
       {
@@ -79,19 +69,13 @@ module.exports = {
       this is to be the path on the server.
     */
     hot: true,
-    publicPath: './src/dist/',
     historyApiFallback: true, // allows BrowserRouter to work
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      chunkFilename: '[id].css',
-      filename: '[name].css',
-    }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src/public/', 'index.html'),
+      template: path.resolve(__dirname, 'index.html'),
       filename: 'index.html',
-      xhtml: true,
-      inject: true,
     }),
     new webpack.ProgressPlugin(),
   ],
@@ -100,3 +84,5 @@ module.exports = {
     net: 'empty',
   },
 };
+
+module.exports = config;

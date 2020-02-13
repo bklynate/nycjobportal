@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@chakra-ui/core';
 import * as actions from '../actions';
+import css from '../styles.css';
 
 import Header from './Header';
 import LandingPage from './LandingPage';
+
+console.log('CSS::', css);
 
 const NotFound404 = () => <h2>PAGE NOT FOUND</h2>;
 
@@ -18,10 +21,10 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider>
-        <div className="container-fluid">
+        <div>
           <>
             <Header />
-            <div className="container">
+            <div className="test">
               <Switch>
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="*" component={NotFound404} />
