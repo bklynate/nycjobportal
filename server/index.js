@@ -19,15 +19,22 @@ import App from '../src/components/App';
 import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobsApi';
 
-import { cookieKey } from './config/keys';
+import keys from './config/keys';
 
 const app = express();
 const { StaticRouter } = ReactRouter;
 const { PORT = 5000 } = process.env;
-const clientIndexHTMLPath = path.join(__dirname, '..', 'dist', 'index.html');
+const clientIndexHTMLPath = path.join(
+  __dirname,
+  '..',
+  'src',
+  'dist',
+  'index.html'
+);
 const baseTemplate = fs.readFileSync(clientIndexHTMLPath);
 const template = createTemplate(baseTemplate);
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/bp_db';
+const { cookieKey } = keys;
 
 require('./models/User');
 require('./services/passport');
@@ -75,14 +82,14 @@ app.use((req, res) => {
 
 if (process.env.NODE_ENV === 'production') {
   // Express serves up production build assets
-  app.use(express.static('dist'));
+  app.use(express.static('/src/dist'));
 
   // This below informs Express to serve up
   // the index.html file if it doesn't recognize
   // the provided routes
   const path = require('path'); // eslint-disable-line
   app.get('*', (request, response) => {
-    response.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+    response.sendFile(path.resolve(__dirname, '/src/dist', 'index.html'));
   });
 }
 

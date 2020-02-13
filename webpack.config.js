@@ -1,13 +1,19 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+console.log('Hello --- ', path.join(__dirname, 'src/index.js'));
+
 module.exports = {
   context: __dirname,
-  entry: path.join(__dirname, 'src/index.js'),
+  entry: {
+    main: [path.join(__dirname, 'src/index.js')],
+  },
   output: {
-    path: path.join(__dirname, '/dist/'),
+    path: path.join(__dirname, 'src/dist/'),
     filename: 'bundle.js',
+    publicPath: './src/dist/',
   },
   devtool: 'cheap-eval-source-map',
   resolve: {
@@ -22,7 +28,7 @@ module.exports = {
     rules: [
       {
         enforce: 'pre',
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/,
       },
@@ -39,9 +45,21 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')()],
+            },
+          },
           'sass-loader',
         ],
       },
@@ -61,21 +79,21 @@ module.exports = {
       this is to be the path on the server.
     */
     hot: true,
-    publicPath: '/dist/',
-    historyApiFallback: true, // allows browserrouter to work
-    proxy: [
-      {
-        context: ['/auth/google', '/api/'],
-        target: 'http://localhost:5000',
-      },
-    ],
+    publicPath: './src/dist/',
+    historyApiFallback: true, // allows BrowserRouter to work
   },
   plugins: [
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/public/index.html'),
-      filename: 'index.html',
+    new MiniCssExtractPlugin({
+      chunkFilename: '[id].css',
+      filename: '[name].css',
     }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/public/', 'index.html'),
+      filename: 'index.html',
+      xhtml: true,
+      inject: true,
+    }),
+    new webpack.ProgressPlugin(),
   ],
   node: {
     fs: 'empty',

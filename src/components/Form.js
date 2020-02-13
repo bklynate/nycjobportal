@@ -31,7 +31,7 @@ class Form extends Component {
             placeholder="Enter a keyword to search for jobs"
             value={jobTitle}
           />
-          <button className="waves-effect waves-light btn">Search Jobs</button>
+          <button>Search Jobs</button>
         </form>
       </div>
     );

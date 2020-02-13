@@ -22,14 +22,10 @@ class Header extends Component {
   render() {
     return (
       <nav>
-        <div className="header nav-wrapper">
-          <Link to="/" className="left brand-logo">
-            NYC Job Portal
-          </Link>
-          <ul className="right header-right">
-            <li className="header-right-content">
-              {this.renderSignInContent()}
-            </li>
+        <div>
+          <Link to="/">NYC Job Portal</Link>
+          <ul>
+            <li>{this.renderSignInContent()}</li>
           </ul>
         </div>
       </nav>

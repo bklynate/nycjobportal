@@ -23,7 +23,12 @@ module.exports = {
     'react/jsx-props-no-spreading': 1,
     'react/jsx-curly-newline': 1,
   },
-
+  env: {
+    es6: true,
+    browser: true,
+    node: true,
+    jest: true,
+  },
   globals: {
     __CLIENT__: true,
     __DEVTOOLS__: true,
