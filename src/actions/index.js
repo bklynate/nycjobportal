@@ -32,14 +32,16 @@ export const fetchAllJobs = () => ({
   onFailure: FETCH_ALL_JOBS_FAILED,
 });
 
-export const fetchKeywordJobs = (keyword = '') => ({
-  url: '/api/getjobbykeyword',
-  method: 'post',
-  params: { keyword },
-  onStart: FETCH_JOBS_BY_KEYWORD_START,
-  onSuccess: response => ({
-    type: FETCH_JOBS_BY_KEYWORD_SUCCESS,
-    payload: response.data,
-  }),
-  onFailure: FETCH_JOBS_BY_KEYWORD_FAILED,
-});
+export const fetchKeywordJobs = (keyword = '') => {
+  return {
+    url: '/api/getjobbykeyword',
+    method: 'post',
+    params: { keyword },
+    onStart: FETCH_JOBS_BY_KEYWORD_START,
+    onSuccess: response => ({
+      type: FETCH_JOBS_BY_KEYWORD_SUCCESS,
+      payload: response.data,
+    }),
+    onFailure: FETCH_JOBS_BY_KEYWORD_FAILED,
+  };
+};

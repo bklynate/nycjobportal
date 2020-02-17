@@ -1,15 +1,18 @@
+/* eslint-disable */
+
 import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
+import { renderRoutes, matchRoutes } from 'react-router-config';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import passport from 'passport';
 import mongoose from 'mongoose';
-// import serialize from 'serialize-javascript';
 
 import compression from 'compression';
+import serialize from 'serialize-javascript';
 
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -17,7 +20,7 @@ import webpack from 'webpack';
 import config from '../config/webpack.dev';
 
 import store from '../src/store';
-import App from '../src/components/App';
+import Routes from '../src/components/Routes';
 
 import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobsApi';
@@ -70,19 +73,57 @@ app.get('*', (request, response) => {
     res.redirect(context.url);
   }
 
-  console.log('HELLO ::', isProduction);
+  const matchedPromises = matchRoutes(Routes, request.path)
+    .map(({ route }) => {
+      const { loadData } = route;
+      return loadData ? loadData(store) : null;
+    })
+    .map(promise => {
+      if (promise) {
+        return new Promise(resolve => {
+          promise.then(resolve).catch(resolve);
+        });
+      }
+    });
 
-  if (isProduction) {
-    console.log('HERE IS PROD');
-    console.log('HERE IS PROD');
-    console.log('HERE IS PROD');
-    console.log('HERE IS PROD');
-    console.log('HERE IS PROD');
-    console.log('HERE IS PROD');
-    console.log('HERE IS PROD');
-  }
+  Promise.all(matchedPromises).then(() => {
+    if (isProduction) {
+      return response.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+            <link href="main.css" rel="stylesheet">
+            <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
+          </head>
+          <body>
+            <noscript>
+              You need to enable JavaScript to run this app.
+            </noscript>
+            <div id="root">
+              ${ReactDOMServer.renderToString(
+                <Provider store={store}>
+                  <StaticRouter location={request.path} context={context}>
+                    <>{renderRoutes(Routes)}</>
+                  </StaticRouter>
+                </Provider>
+              )}
+            </div>
+            <script>
+              window.INITIAL_STATE = ${serialize(store.getState())}
+            </script>
+            <script src="bootstrap-bundle.js"></script>
+            <script src="vendor-bundle.js"></script>
+            <script src="vendors-main-bundle.js"></script>
+            <script src="vendors-main-vendor-bundle.js"></script>
+            <script src="main-bundle.js"></script>
+          </body>
+        </html>
+      `);
+    }
 
-  if (isProduction) {
     response.send(`
     <!DOCTYPE html>
     <html lang="en">
@@ -91,6 +132,7 @@ app.get('*', (request, response) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link href="main.css" rel="stylesheet">
+        <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
       </head>
       <body>
         <noscript>
@@ -99,48 +141,20 @@ app.get('*', (request, response) => {
         <div id="root">
           ${ReactDOMServer.renderToString(
             <Provider store={store}>
-              <StaticRouter location={request.url} context={context}>
-                <App />
+              <StaticRouter location={request.path} context={context}>
+                <>{renderRoutes(Routes)}</>
               </StaticRouter>
             </Provider>
           )}
         </div>
-        <script src="bootstrap-bundle.js"></script>
-        <script src="vendor-bundle.js"></script>
-        <script src="vendors-main-bundle.js"></script>
-        <script src="vendors-main-vendor-bundle.js"></script>
+        <script>
+          window.INITIAL_STATE = ${serialize(store.getState())}
+        </script>
         <script src="main-bundle.js"></script>
       </body>
     </html>
   `);
-  }
-
-  response.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link href="main.css" rel="stylesheet">
-      </head>
-      <body>
-        <noscript>
-          You need to enable JavaScript to run this app.
-        </noscript>
-        <div id="root">
-          ${ReactDOMServer.renderToString(
-            <Provider store={store}>
-              <StaticRouter location={request.url} context={context}>
-                <App />
-              </StaticRouter>
-            </Provider>
-          )}
-        </div>
-        <script src="main-bundle.js"></script>
-      </body>
-    </html>
-  `);
+  });
 });
 
 app.listen(PORT, () => console.log(`They came from http://localhost:${PORT}`)); // eslint-disable-line

@@ -12,7 +12,7 @@ class Form extends Component {
     this.setState(() => ({ jobTitle }));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const { fetchKeywordJobs } = this.props;
     const { jobTitle } = this.state;

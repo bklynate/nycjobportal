@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 
+const Dotenv = require('dotenv-webpack');
+
 const config = {
   entry: {
     server: ['./server/index.js'],
@@ -55,6 +57,7 @@ const config = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new Dotenv(),
     new webpack.ProgressPlugin(),
   ],
 };

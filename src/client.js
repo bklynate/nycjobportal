@@ -6,29 +6,21 @@ import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import './main.css';
 import store from './store';
-import App from './components/App';
+import { renderRoutes } from 'react-router-config';
+import Routes from './components/Routes';
 
-function render(Component) {
+function render() {
   ReactDOM.hydrate(
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <>{renderRoutes(Routes)}</>
       </BrowserRouter>
     </Provider>,
     document.getElementById('root')
   );
 }
 
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-);
-
-// render(App);
+render();
 
 // if (module.hot) {
 //   module.hot.accept('./components/App', () => {

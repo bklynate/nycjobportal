@@ -6,8 +6,7 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import LandingPage from './LandingPage';
-
-const NotFound404 = () => <h2>PAGE NOT FOUND</h2>;
+import NotFoundPage from './NotFoundPage';
 
 class App extends Component {
   componentDidMount() {
@@ -24,7 +23,7 @@ class App extends Component {
             <div>
               <Switch>
                 <Route exact path="/" component={LandingPage} />
-                <Route exact path="*" component={NotFound404} />
+                <Route exact path="*" component={NotFoundPage} />
               </Switch>
             </div>
           </>
@@ -33,5 +32,11 @@ class App extends Component {
     );
   }
 }
+
+const loadData = store => {
+  return store.dispatch(actions.fetchUser());
+};
+
+export { loadData };
 
 export default connect(null, actions)(App);
