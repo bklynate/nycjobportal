@@ -12,7 +12,7 @@ const urlConstants = {
  * If param is not provided then all jobs will be returned.
  * @param {String} userQuery user query/keyword search for jobs API
  * @returns {Object} returns response object
- * @todo Refactor to make function more generic (IE pass url into function)
+ * @todo Refactor to make function more functional (IE: pass url into function)
  */
 export const getJobs = async userQuery => {
   const constructApiUrl = `${urlConstants.base}${urlConstants.resource}${urlConstants.apiKey}`;
