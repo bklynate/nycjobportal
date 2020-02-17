@@ -19,5 +19,10 @@ export const getJobs = async userQuery => {
   const encodeKeywordParam = encodeURI(`$query=select * search '${userQuery}' limit 100&$$query_timeout_seconds=60`);
   const apiUrl = userQuery ? `${constructApiUrl}&&${encodeKeywordParam}` : constructApiUrl;
 
-  return await axios(apiUrl);
+  try {
+    return await axios(apiUrl);
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 }
