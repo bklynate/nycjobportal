@@ -1,28 +1,33 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const config = {
-  context: __dirname,
-  entry: [
-    path.join(__dirname, 'src', 'index.js'),
-    path.join(__dirname, 'src', 'styles.css'),
-  ],
+  entry: {
+    main: [
+      'react-hot-loader/patch',
+      '@babel/register',
+      'webpack-hot-middleware/client?reload=true',
+      './src/index.js',
+    ],
+  },
+  mode: 'development',
   output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js',
-    publicPath: path.resolve(__dirname, '/dist'),
+    path: path.join(__dirname, '../dist'),
+    filename: '[name]-bundle.js',
+    publicPath: '/',
   },
   devtool: 'cheap-eval-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
   },
-  stats: {
-    colors: true,
-    reasons: true, // better error outputs
-    chunks: true,
+  devServer: {
+    contentBase: 'dist',
+    overlay: true,
+    hot: true,
+    stats: {
+      colors: true,
+    },
   },
   module: {
     rules: [
@@ -43,12 +48,14 @@ const config = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
             },
           },
         ],
@@ -58,31 +65,20 @@ const config = {
         use: [
           {
             loader: 'html-loader',
+            options: {
+              attrs: ['img:src'],
+            },
           },
         ],
       },
     ],
   },
-  devServer: {
-    /* 
-      PublicPath lets webpack know where you anticipate your bundle to be served from
-      this is to be the path on the server.
-    */
-    hot: true,
-    historyApiFallback: true, // allows BrowserRouter to work
-  },
   plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'index.html'),
-      filename: 'index.html',
-    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new MiniCssExtractPlugin(),
     new webpack.ProgressPlugin(),
   ],
-  node: {
-    fs: 'empty',
-    net: 'empty',
-  },
 };
 
 module.exports = config;

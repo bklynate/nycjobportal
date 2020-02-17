@@ -2,3 +2,5 @@ node_modules
 .DS_store
 dist
 server/config/dev.js
+build
+.env

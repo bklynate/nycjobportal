@@ -1,4 +1,5 @@
-import axios from 'axios';
+// import axios from 'axios';
+import fetch from 'cross-fetch';
 
 /**
  * Dispatched action require the following shape:
@@ -43,7 +44,7 @@ export const ajaxMiddleware = () => next => async action => {
   processStep(next, onStart);
 
   try {
-    const response = await axios[method](url, params);
+    const response = await fetch[method](url, params);
     processStep(next, onSuccess, response);
   } catch (error) {
     processStep(next, onFailure, error);

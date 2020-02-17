@@ -1,0 +1,11 @@
+body {
+  background-color: yellow;
+  color: papayawhip;
+  font-size: 85px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.test > h1 {
+  color: blue;
+}

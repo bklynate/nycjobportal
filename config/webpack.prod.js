@@ -1,0 +1,92 @@
+const path = require('path');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+const config = {
+  entry: {
+    vendor: ['react', 'react-dom'],
+    main: ['./src/index.js'],
+  },
+  mode: 'production',
+  output: {
+    path: path.join(__dirname, '../dist'),
+    filename: '[name]-bundle.js',
+    publicPath: '/',
+  },
+  devtool: 'cheap-eval-source-map',
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
+  module: {
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.(js|jsx)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              attrs: ['img:src'],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new MiniCssExtractPlugin(),
+    new webpack.ProgressPlugin(),
+  ],
+  optimization: {
+    minimizer: [new OptimizeCSSAssetsPlugin({})],
+    runtimeChunk: {
+      name: 'bootstrap',
+    },
+    splitChunks: {
+      chunks: 'all', // <-- The key to this
+      automaticNameDelimiter: '-',
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'all',
+          minChunks: Infinity,
+        },
+      },
+    },
+  },
+};
+
+module.exports = config;
