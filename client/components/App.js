@@ -1,12 +1,11 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@chakra-ui/core';
+import { renderRoutes } from 'react-router-config';
 import * as actions from '../actions';
 
 import Header from './Header';
-import LandingPage from './LandingPage';
-import NotFoundPage from './NotFoundPage';
 
 class App extends Component {
   componentDidMount() {
@@ -15,19 +14,14 @@ class App extends Component {
   }
 
   render() {
+    const { route } = this.props;
+    const { routes } = route;
     return (
       <ThemeProvider>
-        <div>
-          <>
-            <Header />
-            <div>
-              <Switch>
-                <Route exact path="/" component={LandingPage} />
-                <Route exact path="*" component={NotFoundPage} />
-              </Switch>
-            </div>
-          </>
-        </div>
+        <>
+          <Header />
+          <>{renderRoutes(routes)}</>
+        </>
       </ThemeProvider>
     );
   }

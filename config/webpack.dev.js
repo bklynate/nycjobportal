@@ -1,14 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   entry: {
     main: [
-      'react-hot-loader/patch',
+      // 'react-hot-loader/patch',
       '@babel/register',
-      'webpack-hot-middleware/client?reload=true',
-      './src/index.js',
+      'webpack-hot-middleware/client?/http://localhost:5000&reload=true',
+      './client/index.js',
     ],
   },
   mode: 'development',
@@ -76,6 +77,17 @@ const config = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
+    new LoadablePlugin({
+      filename: 'loadable.json',
+      writeToDisk: {
+        filename: path.resolve(__dirname, '../dist'),
+      },
+    }),
     new MiniCssExtractPlugin(),
     new webpack.ProgressPlugin(),
   ],

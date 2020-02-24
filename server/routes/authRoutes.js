@@ -1,4 +1,5 @@
 import passport from 'passport';
+import { isEmptyObject } from '../../util/isEmptyObject';
 
 export default app => {
   app.get(
@@ -21,8 +22,10 @@ export default app => {
     response.redirect('/');
   });
 
+  /* eslint-disable-next-line */
   app.get('/api/current_user', (request, response) => {
     const { user = {} } = request;
+    if (!isEmptyObject(user)) return {};
     response.send(user);
   });
 };

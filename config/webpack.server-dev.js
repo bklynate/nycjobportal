@@ -8,7 +8,7 @@ const config = {
   entry: {
     server: ['./server/index.js'],
   },
-  mode: 'production',
+  mode: 'development',
   target: 'node',
   externals: nodeExternals(),
   output: {
@@ -53,7 +53,7 @@ const config = {
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
+        NODE_ENV: JSON.stringify('development'),
       },
     }),
     new Dotenv(),

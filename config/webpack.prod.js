@@ -1,12 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
   entry: {
     vendor: ['react', 'react-dom'],
-    main: ['./src/index.js'],
+    main: ['./client/index.js'],
   },
   mode: 'production',
   output: {
@@ -65,6 +66,12 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new LoadablePlugin({
+      filename: 'loadable.json',
+      writeToDisk: {
+        filename: path.resolve(__dirname, '../dist'),
       },
     }),
     new MiniCssExtractPlugin(),

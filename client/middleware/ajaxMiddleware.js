@@ -1,5 +1,10 @@
-// import axios from 'axios';
-import fetch from 'cross-fetch';
+import axios from 'axios';
+
+const { baseURL } = process.env;
+
+const axiosWithBaseURL = axios.create({
+  baseURL,
+});
 
 /**
  * Dispatched action require the following shape:
@@ -44,7 +49,7 @@ export const ajaxMiddleware = () => next => async action => {
   processStep(next, onStart);
 
   try {
-    const response = await fetch[method](url, params);
+    const response = await axiosWithBaseURL[method](url, params);
     processStep(next, onSuccess, response);
   } catch (error) {
     processStep(next, onFailure, error);

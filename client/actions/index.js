@@ -36,6 +36,7 @@ export const fetchKeywordJobs = (keyword = '') => {
   return {
     url: '/api/getjobbykeyword',
     method: 'post',
+
     params: { keyword },
     onStart: FETCH_JOBS_BY_KEYWORD_START,
     onSuccess: response => ({

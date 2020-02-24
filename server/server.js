@@ -1,11 +1,10 @@
-/* eslint-disable */
-
-import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes, matchRoutes } from 'react-router-config';
+
+import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import passport from 'passport';
@@ -19,13 +18,13 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
 import config from '../config/webpack.dev';
 
-import store from '../src/store';
-import Routes from '../src/components/Routes';
-
+import store from '../client/store';
+import Routes from '../client/components/Routes';
 import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobsApi';
-
 import keys from './config/keys';
+
+import loadable from '../dist/loadable.json';
 
 const app = express();
 const compiler = webpack(config);
@@ -43,12 +42,11 @@ app.use(compression());
 /* ORDER MATTERS ! */
 
 app.use(express.static('dist'));
+app.use(passport.initialize());
+app.use(passport.session());
 
-if (!isProduction) {
-  app.use(webpackDevMiddleware(compiler, config.devServer));
-  app.use(webpackHotMiddleware(compiler));
-  console.log('....Webpack Dev & Hot Middleware Enabled....');
-}
+mongoose.Promise = global.Promise;
+mongoose.connect(mongoUrl);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -59,10 +57,12 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
-mongoose.Promise = global.Promise;
-mongoose.connect(mongoUrl);
+if (!isProduction) {
+  app.use(webpackDevMiddleware(compiler, config.devServer));
+  app.use(webpackHotMiddleware(compiler));
+  console.log('....Webpack Dev & Hot Middleware Enabled....');
+}
+
 authRoutes(app);
 jobRoutes(app);
 
@@ -70,7 +70,7 @@ app.get('*', (request, response) => {
   const context = {};
 
   if (context.url) {
-    res.redirect(context.url);
+    response.redirect(301, context.url);
   }
 
   const matchedPromises = matchRoutes(Routes, request.path)
@@ -78,6 +78,7 @@ app.get('*', (request, response) => {
       const { loadData } = route;
       return loadData ? loadData(store) : null;
     })
+    /* eslint-disable-next-line */
     .map(promise => {
       if (promise) {
         return new Promise(resolve => {
@@ -86,8 +87,24 @@ app.get('*', (request, response) => {
       }
     });
 
+  /* eslint-disable-next-line */
   Promise.all(matchedPromises).then(() => {
     if (isProduction) {
+      const { main, vendor } = loadable.entrypoints;
+      const mainJSFiles = (main.assets || [])
+        .filter(asset => asset.endsWith('.js'))
+        .map(asset => `<script src="${asset}"></script>`);
+      const vendorJSFiles = (vendor.assets || [])
+        .filter(asset => asset.endsWith('.js'))
+        .map(asset => `<script src="${asset}"></script>`);
+      const mainStyleSheets = (main.assets || [])
+        .filter(asset => asset.endsWith('.css'))
+        .map(
+          asset => `<link href="${asset}" rel="stylesheet" type="text/css">`
+        );
+
+      const jsFiles = Array.from(new Set(mainJSFiles, vendorJSFiles));
+
       return response.send(`
         <!DOCTYPE html>
         <html lang="en">
@@ -95,7 +112,7 @@ app.get('*', (request, response) => {
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-            <link href="main.css" rel="stylesheet">
+            ${mainStyleSheets.map(file => file)}
             <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
           </head>
           <body>
@@ -114,11 +131,7 @@ app.get('*', (request, response) => {
             <script>
               window.INITIAL_STATE = ${serialize(store.getState())}
             </script>
-            <script src="bootstrap-bundle.js"></script>
-            <script src="vendor-bundle.js"></script>
-            <script src="vendors-main-bundle.js"></script>
-            <script src="vendors-main-vendor-bundle.js"></script>
-            <script src="main-bundle.js"></script>
+            ${jsFiles.map(file => file).join('')}
           </body>
         </html>
       `);
