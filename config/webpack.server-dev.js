@@ -13,7 +13,7 @@ const config = {
   externals: nodeExternals(),
   output: {
     path: path.join(__dirname, '../build'),
-    filename: '[name]-bundle.js',
+    filename: 'server-bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],

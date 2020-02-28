@@ -59,6 +59,7 @@ app.use(
 if (!isProduction) {
   app.use(webpackDevMiddleware(compiler, config.devServer));
   app.use(webpackHotMiddleware(compiler));
+  console.log('\n');
   console.log('....Webpack Dev & Hot Middleware Enabled....');
 }
 
