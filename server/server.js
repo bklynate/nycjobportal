@@ -22,7 +22,6 @@ import store from '../client/store';
 import Routes from '../client/components/Routes';
 import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobsApi';
-import keys from './config/keys';
 
 import loadable from '../dist/loadable.json';
 
@@ -32,7 +31,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const { PORT = 5000 } = process.env;
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/bp_db';
-const { cookieKey } = keys;
+const { cookieKey } = process.env.COOKIE_KEY;
 
 require('./models/User');
 require('./services/passport');
