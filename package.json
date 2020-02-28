@@ -9,14 +9,14 @@
   "scripts": {
     "build:client:prod": "rm -rf dist && webpack --config=config/webpack.prod.js",
     "build:client:dev": "rm -rf dist && webpack --config=config/webpack.dev.js",
-    "build:client:dev:watch": " rm -rf dist && webpack --config=config/webpack.dev.js --watch config/webpack.dev.js",
+    "build:client:dev:watch": "rm -rf dist && webpack --config=config/webpack.dev.js --watch config/webpack.dev.js",
     "build:server:prod": "rm -rf build && webpack --config=config/webpack.server.js",
     "build:server:dev": "rm -rf build && webpack --config=config/webpack.server-dev.js",
     "start": "webpack-dev-server --config=config/webpack.dev.js",
-    "prod": "NODE_ENV=production node build/server-bundle.js",
+    "prod": "node build/server-bundle.js",
     "upgrade-interactive": "npm-check --update",
     "audit": "npm audit fix",
-    "dev-server": "NODE_ENV=development nodemon --inspect --watch config --watch server --watch build build/server-bundle.js",
+    "dev-server": "nodemon --inspect --watch config --watch server --watch build build/server-bundle.js",
     "lint": "eslint \"./**/*.{js,jsx}\" --quiet",
     "precommit": "lint-staged"
   },

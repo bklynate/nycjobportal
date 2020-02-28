@@ -84,9 +84,6 @@ const config = {
     }),
     new LoadablePlugin({
       filename: 'loadable.json',
-      writeToDisk: {
-        filename: path.resolve(__dirname, '../dist'),
-      },
     }),
     new MiniCssExtractPlugin(),
     new webpack.ProgressPlugin(),
