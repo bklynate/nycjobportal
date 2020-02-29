@@ -3,7 +3,6 @@
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import mongoose from 'mongoose';
-import clientKeys from '../config/keys';
 
 const User = mongoose.model('users');
 
@@ -20,8 +19,8 @@ passport.deserializeUser((userID, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: clientKeys.googleClientID,
-      clientSecret: clientKeys.googleClientSecret,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
       proxy: true,
     },
