@@ -1,7 +1,4 @@
 node_modules/
-client/node_modules/
-client/scripts/
-client/build/
-client/config/
-server/server-dist
-client/src/registerServiceWorker.js
+node_modules/
+dist/
+build/

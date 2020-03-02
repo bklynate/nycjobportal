@@ -1,4 +1,4 @@
-import { getJobs } from './getJobs.js'
+import { getJobs } from './getJobs';
 
 export default app => {
   app.get('/api/alljobs', async (req, res) => {
