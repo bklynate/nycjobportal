@@ -61,6 +61,7 @@ if (!isProduction) {
   app.use(webpackHotMiddleware(compiler));
   console.log('\n');
   console.log('....Webpack Dev & Hot Middleware Enabled....');
+  console.log('\n');
 }
 
 authRoutes(app);
@@ -137,7 +138,7 @@ app.get('*', (request, response) => {
       `);
     }
 
-    response.send(`
+    return response.send(`
     <!DOCTYPE html>
     <html lang="en">
       <head>
@@ -152,13 +153,13 @@ app.get('*', (request, response) => {
           You need to enable JavaScript to run this app.
         </noscript>
         <div id="root">
-          ${ReactDOMServer.renderToString(
-            <Provider store={store}>
-              <StaticRouter location={request.path} context={context}>
-                <>{renderRoutes(Routes)}</>
-              </StaticRouter>
-            </Provider>
-          )}
+        ${ReactDOMServer.renderToString(
+          <Provider store={store}>
+            <StaticRouter location={request.path} context={context}>
+              <>{renderRoutes(Routes)}</>
+            </StaticRouter>
+          </Provider>
+        )}
         </div>
         <script>
           window.INITIAL_STATE = ${serialize(store.getState())}

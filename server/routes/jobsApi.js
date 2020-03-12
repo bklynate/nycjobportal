@@ -3,8 +3,8 @@ import { getJobs } from './getJobs';
 export default app => {
   app.get('/api/alljobs', async (req, res) => {
     try {
-      const response = await getJobs();
-      res.status(200).json(response.data);
+      const { data } = await getJobs();
+      res.status(200).send(data);
     } catch (error) {
       res.status(500).json({ message: error });
     }
@@ -13,8 +13,8 @@ export default app => {
   app.post('/api/getjobbykeyword', async (req, res) => {
     try {
       const { keyword } = req.body;
-      const response = await getJobs(keyword);
-      res.status(200).json(response.data);
+      const { data } = await getJobs(keyword);
+      res.status(200).send({ data });
     } catch (error) {
       res.status(500).json({ message: error });
     }
