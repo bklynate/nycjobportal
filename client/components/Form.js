@@ -7,9 +7,22 @@ class Form extends Component {
     jobTitle: '',
   };
 
+  componentDidMount() {
+    const { searchQuery, fetchKeywordJobs } = this.props;
+    if (searchQuery) {
+      this.setState({ jobTitle: searchQuery });
+      fetchKeywordJobs(searchQuery);
+    }
+  }
+
+  componentDidCatch(error, info) {
+    console.log('Here is the error: ', error);
+    console.log('Here is the info: ', info);
+  }
+
   onInputChange = e => {
     const jobTitle = e.target.value;
-    this.setState(() => ({ jobTitle }));
+    this.setState({ jobTitle });
   };
 
   onSubmit = async e => {
@@ -37,5 +50,11 @@ class Form extends Component {
     );
   }
 }
+
+const loadData = store => {
+  return store.dispatch(actions.fetchKeywordJobs());
+};
+
+export { loadData };
 
 export default connect(null, actions)(Form);

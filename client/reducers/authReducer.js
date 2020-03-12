@@ -1,23 +1,9 @@
-import {
-  FETCH_USER_START,
-  FETCH_USER_SUCCESS,
-  FETCH_USER_FAILED,
-} from '../actions/types';
+import { FETCH_USER } from '../actions/types';
 
-const initialState = {
-  isLoading: false,
-  user: null,
-  error: null,
-};
-
-export default function(state = initialState, action) {
+export default function(state = {}, action) {
   switch (action.type) {
-    case FETCH_USER_START:
-      return { ...state, isLoading: true };
-    case FETCH_USER_SUCCESS:
-      return { ...state, isLoading: false, user: action.payload };
-    case FETCH_USER_FAILED:
-      return { ...state, isLoading: false, error: action.payload };
+    case FETCH_USER:
+      return action.payload || false;
     default:
       return state;
   }

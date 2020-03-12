@@ -1,17 +1,18 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { ajaxMiddleware } from './middleware';
+// import { ajaxMiddleware } from './middleware';
 import reducers from './reducers';
 
-const middleware = [thunk, ajaxMiddleware];
-
+const middleware = [thunk];
 let mutableStore;
 
 if (typeof window !== 'undefined') {
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   mutableStore = createStore(
     reducers,
     window.INITIAL_STATE,
-    applyMiddleware(...middleware)
+    composeEnhancers(applyMiddleware(...middleware))
   );
 }
 

@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 import { Flex } from '@chakra-ui/core';
 import JobResultItem from './JobResultItem';
 
-const renderJobItems = job => (
-  <JobResultItem key={`${job.job_id}-${job.posting_type}`} data={job} />
-);
+const renderResultsList = props => {
+  const { data: jobs = [] } = props;
+  return jobs.map((job, index) => <JobResultItem key={index} data={job} />);
+};
 
 const JobsResultsList = props => {
-  const { searchJobKeywords } = props;
   return (
     <Flex flexDirection="row" wrap="wrap" justify="space-between" my={6}>
-      {searchJobKeywords.map(renderJobItems)}
+      {renderResultsList(props)}
     </Flex>
   );
 };
 
 const mapStateToProps = state => {
-  const { searchJobKeywords } = state.jobs;
-  return { searchJobKeywords };
+  const { jobs } = state || {};
+  return jobs;
 };
 
 export default connect(mapStateToProps)(JobsResultsList);
