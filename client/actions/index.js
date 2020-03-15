@@ -18,6 +18,7 @@ export const fetchAllJobs = () => async dispatch => {
 };
 
 export const fetchKeywordJobs = keyword => async dispatch => {
+  if (!keyword) return;
   const response = await axiosWithBaseURL.post('/api/getjobbykeyword', {
     keyword,
   });

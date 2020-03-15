@@ -124,7 +124,7 @@ app.get('*', (request, response) => {
               ${ReactDOMServer.renderToString(
                 <Provider store={store}>
                   <StaticRouter location={request.path} context={context}>
-                    <>{renderRoutes(Routes)}</>
+                    {renderRoutes(Routes)}
                   </StaticRouter>
                 </Provider>
               )}
@@ -156,7 +156,7 @@ app.get('*', (request, response) => {
         ${ReactDOMServer.renderToString(
           <Provider store={store}>
             <StaticRouter location={request.path} context={context}>
-              <>{renderRoutes(Routes)}</>
+              {renderRoutes(Routes)}
             </StaticRouter>
           </Provider>
         )}
