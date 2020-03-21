@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -27,8 +28,9 @@ class Form extends Component {
 
   onSubmit = async e => {
     e.preventDefault();
-    const { fetchKeywordJobs } = this.props;
+    const { fetchKeywordJobs, history } = this.props;
     const { jobTitle } = this.state;
+    history.push(`?q=${jobTitle}`);
     fetchKeywordJobs(jobTitle);
   };
 
@@ -51,10 +53,12 @@ class Form extends Component {
   }
 }
 
-const loadData = store => {
-  return store.dispatch(actions.fetchKeywordJobs());
+const loadData = (store, request) => {
+  const { query } = request || {};
+  const { q: queryString } = query || {};
+  return store.dispatch(actions.fetchKeywordJobs(queryString));
 };
 
 export { loadData };
 
-export default connect(null, actions)(Form);
+export default withRouter(connect(null, actions)(Form));
