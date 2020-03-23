@@ -45,7 +45,7 @@
     "emotion-theming": "^10.0.27",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "express": "^4.17.1",
-    "file-loader": "^5.0.2",
+    "file-loader": "^6.0.0",
     "jest": "^25.1.0",
     "mongoose": "^5.8.11",
     "nodemon": "^2.0.2",
