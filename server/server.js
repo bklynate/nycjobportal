@@ -61,6 +61,7 @@ if (!isProduction) {
   app.use(webpackHotMiddleware(compiler));
   console.log('\n');
   console.log('....Webpack Dev & Hot Middleware Enabled....');
+  console.log('\n');
 }
 
 authRoutes(app);
@@ -76,7 +77,7 @@ app.get('*', (request, response) => {
   const matchedPromises = matchRoutes(Routes, request.path)
     .map(({ route }) => {
       const { loadData } = route;
-      return loadData ? loadData(store) : null;
+      return loadData ? loadData(store, request) : null;
     })
     /* eslint-disable-next-line */
     .map(promise => {
@@ -89,6 +90,13 @@ app.get('*', (request, response) => {
 
   /* eslint-disable-next-line */
   Promise.all(matchedPromises).then(() => {
+    const html = ReactDOMServer.renderToString(
+      <Provider store={store}>
+        <StaticRouter location={request.path} context={context}>
+          {renderRoutes(Routes)}
+        </StaticRouter>
+      </Provider>
+    );
     if (isProduction) {
       const { main, vendor } = loadable.entrypoints;
       const mainJSFiles = (main.assets || [])
@@ -119,17 +127,9 @@ app.get('*', (request, response) => {
             <noscript>
               You need to enable JavaScript to run this app.
             </noscript>
-            <div id="root">
-              ${ReactDOMServer.renderToString(
-                <Provider store={store}>
-                  <StaticRouter location={request.path} context={context}>
-                    <>{renderRoutes(Routes)}</>
-                  </StaticRouter>
-                </Provider>
-              )}
-            </div>
+            <div id="root">${html}</div>
             <script>
-              window.INITIAL_STATE = ${serialize(store.getState())}
+              window.STATE = ${serialize(store.getState())}
             </script>
             ${jsFiles.map(file => file).join('')}
           </body>
@@ -137,7 +137,7 @@ app.get('*', (request, response) => {
       `);
     }
 
-    response.send(`
+    return response.send(`
     <!DOCTYPE html>
     <html lang="en">
       <head>
@@ -151,17 +151,9 @@ app.get('*', (request, response) => {
         <noscript>
           You need to enable JavaScript to run this app.
         </noscript>
-        <div id="root">
-          ${ReactDOMServer.renderToString(
-            <Provider store={store}>
-              <StaticRouter location={request.path} context={context}>
-                <>{renderRoutes(Routes)}</>
-              </StaticRouter>
-            </Provider>
-          )}
-        </div>
+        <div id="root">${html}</div>
         <script>
-          window.INITIAL_STATE = ${serialize(store.getState())}
+          window.STATE = ${serialize(store.getState())}
         </script>
         <script src="main-bundle.js"></script>
       </body>

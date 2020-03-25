@@ -26,7 +26,6 @@ export const getJobs = async userQuery => {
   try {
     return await axios(apiUrl);
   } catch (error) {
-    console.log(error);
     return error;
   }
 };

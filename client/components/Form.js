@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -7,15 +8,29 @@ class Form extends Component {
     jobTitle: '',
   };
 
+  componentDidMount() {
+    const { searchQuery, fetchKeywordJobs } = this.props;
+    if (searchQuery) {
+      this.setState({ jobTitle: searchQuery });
+      fetchKeywordJobs(searchQuery);
+    }
+  }
+
+  componentDidCatch(error, info) {
+    console.log('Here is the error: ', error);
+    console.log('Here is the info: ', info);
+  }
+
   onInputChange = e => {
     const jobTitle = e.target.value;
-    this.setState(() => ({ jobTitle }));
+    this.setState({ jobTitle });
   };
 
   onSubmit = async e => {
     e.preventDefault();
-    const { fetchKeywordJobs } = this.props;
+    const { fetchKeywordJobs, history } = this.props;
     const { jobTitle } = this.state;
+    history.push(`?q=${jobTitle}`);
     fetchKeywordJobs(jobTitle);
   };
 
@@ -38,4 +53,12 @@ class Form extends Component {
   }
 }
 
-export default connect(null, actions)(Form);
+const loadData = (store, request) => {
+  const { query } = request || {};
+  const { q: queryString } = query || {};
+  return store.dispatch(actions.fetchKeywordJobs(queryString));
+};
+
+export { loadData };
+
+export default withRouter(connect(null, actions)(Form));

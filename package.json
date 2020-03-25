@@ -9,10 +9,11 @@
   "scripts": {
     "build:client:prod": "rm -rf dist && webpack --config=config/webpack.prod.js",
     "build:client:dev": "rm -rf dist && webpack --config=config/webpack.dev.js",
-    "build:client:dev:watch": "rm -rf dist && webpack --config=config/webpack.dev.js --watch config/webpack.dev.js",
+    "build:client:dev:watch": "rm -rf dist && webpack --config=config/webpack.dev.js --watch client",
     "build:server:prod": "rm -rf build && webpack --config=config/webpack.server.js",
     "build:server:dev": "rm -rf build && webpack --config=config/webpack.server-dev.js",
     "build:server:dev:watch": "rm -rf build && webpack --config=config/webpack.server-dev.js --watch server",
+    "dev": "npm run build:client:dev && npm run build:server:dev && npm run dev-server",
     "start": "webpack-dev-server --config=config/webpack.dev.js",
     "prod": "node build/server-bundle.js",
     "upgrade-interactive": "npm-check --update",
@@ -29,7 +30,7 @@
     "@babel/polyfill": "^7.8.3",
     "@babel/register": "^7.8.3",
     "@babel/runtime": "^7.8.4",
-    "@chakra-ui/core": "^0.5.2",
+    "@chakra-ui/core": "^0.6.1",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
     "autoprefixer": "^9.7.4",
@@ -53,6 +54,7 @@
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "postcss-loader": "^3.0.0",
+    "query-string": "^6.11.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.5.3",
@@ -62,7 +64,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.2.0",
     "serialize-javascript": "^3.0.0",
-    "url-loader": "^3.0.0",
+    "url-loader": "^4.0.0",
     "webpack-manifest-plugin": "^2.2.0"
   },
   "devDependencies": {

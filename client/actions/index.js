@@ -1,48 +1,26 @@
-import {
-  FETCH_USER_START,
-  FETCH_USER_SUCCESS,
-  FETCH_USER_FAILED,
-  FETCH_ALL_JOBS_START,
-  FETCH_ALL_JOBS_SUCCESS,
-  FETCH_ALL_JOBS_FAILED,
-  FETCH_JOBS_BY_KEYWORD_START,
-  FETCH_JOBS_BY_KEYWORD_SUCCESS,
-  FETCH_JOBS_BY_KEYWORD_FAILED,
-} from './types';
+import axios from 'axios';
+import { FETCH_USER, FETCH_ALL_JOBS, FETCH_KEYWORD_JOBS } from './types';
 
-export const fetchUser = () => ({
-  url: '/api/current_user',
-  method: 'get',
-  onStart: FETCH_USER_START,
-  onSuccess: response => ({
-    type: FETCH_USER_SUCCESS,
-    payload: response.data,
-  }),
-  onFailure: FETCH_USER_FAILED,
+const { baseURL } = process.env;
+
+const axiosWithBaseURL = axios.create({
+  baseURL,
 });
 
-export const fetchAllJobs = () => ({
-  url: '/api/alljobs',
-  method: 'get',
-  onStart: FETCH_ALL_JOBS_START,
-  onSuccess: response => ({
-    type: FETCH_ALL_JOBS_SUCCESS,
-    payload: response.data,
-  }),
-  onFailure: FETCH_ALL_JOBS_FAILED,
-});
+export const fetchUser = () => async dispatch => {
+  const response = await axiosWithBaseURL.get('/api/current_user');
+  dispatch({ type: FETCH_USER, payload: response.data });
+};
 
-export const fetchKeywordJobs = (keyword = '') => {
-  return {
-    url: '/api/getjobbykeyword',
-    method: 'post',
+export const fetchAllJobs = () => async dispatch => {
+  const response = await axiosWithBaseURL.get('/api/alljobs');
+  dispatch({ type: FETCH_ALL_JOBS, payload: response.data });
+};
 
-    params: { keyword },
-    onStart: FETCH_JOBS_BY_KEYWORD_START,
-    onSuccess: response => ({
-      type: FETCH_JOBS_BY_KEYWORD_SUCCESS,
-      payload: response.data,
-    }),
-    onFailure: FETCH_JOBS_BY_KEYWORD_FAILED,
-  };
+export const fetchKeywordJobs = keyword => async dispatch => {
+  if (!keyword) return;
+  const response = await axiosWithBaseURL.post('/api/getjobbykeyword', {
+    keyword,
+  });
+  dispatch({ type: FETCH_KEYWORD_JOBS, payload: response.data });
 };
