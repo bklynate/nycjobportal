@@ -21,6 +21,7 @@
     "dev-server": "nodemon --inspect --watch build build/server-bundle.js",
     "clear-assets": "rm -rf build dist",
     "lint": "eslint \"./**/*.{js,jsx}\" --quiet",
+    "test": "jest",
     "precommit": "lint-staged"
   },
   "author": "",
@@ -112,5 +113,32 @@
     "hooks": {
       "pre-commit": "npm run precommit"
     }
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/server>/**/*.js"
+    ],
+    "testMatch": [
+      "<rootDir>/server/**/**/__tests__/**/*.js?(x)",
+      "<rootDir>/server/routes/tests/*.test.js?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ]
   }
 }
