@@ -24,8 +24,8 @@ export default app => {
 
   /* eslint-disable-next-line */
   app.get('/api/current_user', (request, response) => {
-    const { user = {} } = request;
-    if (!isEmptyObject(user)) return {};
-    response.send(user);
+    const { user } = request;
+    if (isEmptyObject(user)) return response.send({ user: {} });
+    response.send({ user });
   });
 };
