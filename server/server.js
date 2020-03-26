@@ -7,6 +7,7 @@ import { renderRoutes, matchRoutes } from 'react-router-config';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
+import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import mongoose from 'mongoose';
 
@@ -31,30 +32,30 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const { PORT = 5000 } = process.env;
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/bp_db';
-const { cookieKey } = process.env.COOKIE_KEY;
+const cookieKey = process.env.COOKIE_KEY;
 
+/* ORDER MATTERS ! */
 require('./models/User');
 require('./services/passport');
 
 app.use(compression());
 
-/* ORDER MATTERS ! */
-
 app.use(express.static('dist'));
-app.use(passport.initialize());
-app.use(passport.session());
-
-mongoose.Promise = global.Promise;
-mongoose.connect(mongoUrl);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cookieSession({
+    name: 'auth-0',
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [cookieKey],
+    sameSite: true,
+    secure: isProduction,
   })
 );
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 if (!isProduction) {
   app.use(webpackDevMiddleware(compiler, config.devServer));
@@ -64,10 +65,13 @@ if (!isProduction) {
   console.log('\n');
 }
 
+mongoose.Promise = global.Promise;
+mongoose.connect(mongoUrl);
+
 authRoutes(app);
 jobRoutes(app);
 
-app.get('*', (request, response) => {
+app.get('/', (request, response) => {
   const context = {};
 
   if (context.url) {
@@ -97,6 +101,7 @@ app.get('*', (request, response) => {
         </StaticRouter>
       </Provider>
     );
+
     if (isProduction) {
       const { main, vendor } = loadable.entrypoints;
       const mainJSFiles = (main.assets || [])
@@ -120,6 +125,7 @@ app.get('*', (request, response) => {
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+            <link rel="shortcut icon" href="#" />
             ${mainStyleSheets.map(file => file)}
             <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
           </head>
@@ -144,6 +150,7 @@ app.get('*', (request, response) => {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="shortcut icon" href="#" />
         <link href="main.css" rel="stylesheet">
         <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
       </head>

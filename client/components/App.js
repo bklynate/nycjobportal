@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ThemeProvider } from '@chakra-ui/core';
 import { renderRoutes } from 'react-router-config';
 import * as actions from '../actions';
+import { isEmptyObject } from '../../util/isEmptyObject';
 
 import Header from './Header';
 
@@ -20,15 +21,16 @@ class App extends Component {
       <ThemeProvider>
         <>
           <Header />
-          <>{renderRoutes(routes)}</>
+          {renderRoutes(routes)}
         </>
       </ThemeProvider>
     );
   }
 }
 
-const loadData = store => {
-  return store.dispatch(actions.fetchUser());
+const loadData = (store, request) => {
+  const { user } = request;
+  return store.dispatch(actions.fetchUser(user));
 };
 
 export { loadData };

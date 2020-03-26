@@ -29,7 +29,10 @@ passport.use(
       if (existingUser) {
         return done(null, existingUser);
       }
-      const newUser = await new User({ googleID: profile.id }).save();
+      const newUser = await new User({
+        googleID: profile.id,
+        token: accessToken,
+      }).save();
       done(null, newUser);
     }
   )
