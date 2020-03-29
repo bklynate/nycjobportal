@@ -19,7 +19,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
 import config from '../config/webpack.dev';
 
-import store from '../client/store';
+import configureStore from '../client/configureStore';
 import Routes from '../client/components/Routes';
 import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobsApi';
@@ -72,7 +72,10 @@ authRoutes(app);
 jobRoutes(app);
 
 app.get('/', (request, response) => {
+  const store = configureStore({ request });
   const context = {};
+
+  const state = store.getState();
 
   if (context.url) {
     response.redirect(301, context.url);
@@ -135,7 +138,7 @@ app.get('/', (request, response) => {
             </noscript>
             <div id="root">${html}</div>
             <script>
-              window.STATE = ${serialize(store.getState())}
+              window.STATE = ${serialize(state)}
             </script>
             ${jsFiles.map(file => file).join('')}
           </body>
@@ -160,7 +163,7 @@ app.get('/', (request, response) => {
         </noscript>
         <div id="root">${html}</div>
         <script>
-          window.STATE = ${serialize(store.getState())}
+          window.STATE = ${serialize(state)}
         </script>
         <script src="main-bundle.js"></script>
       </body>

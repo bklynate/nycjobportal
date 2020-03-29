@@ -1,5 +1,4 @@
 import passport from 'passport';
-import { isEmptyObject } from '../../util/isEmptyObject';
 
 export default app => {
   app.get(
@@ -13,19 +12,13 @@ export default app => {
     '/auth/google/callback',
     passport.authenticate('google'),
     (request, response) => {
+      response.cookie('asx_data', request.user.token);
       response.redirect('/');
     }
   );
 
   app.get('/api/logout', (request, response) => {
-    request.logout();
+    response.clearCookie('asx_data');
     response.redirect('/');
-  });
-
-  /* eslint-disable-next-line */
-  app.get('/api/current_user', (request, response) => {
-    const { user } = request;
-    if (isEmptyObject(user)) return response.send({ user: {} });
-    response.send({ user });
   });
 };
