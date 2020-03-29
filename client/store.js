@@ -8,7 +8,7 @@ let mutableStore;
 if (typeof window !== 'undefined') {
   mutableStore = createStore(
     reducers,
-    window.INITIAL_STATE,
+    window.STATE,
     compose(
       applyMiddleware(...middleware),
       window.__REDUX_DEVTOOLS_EXTENSION__
