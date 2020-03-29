@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import authReducer from './authReducer';
-import jobsReducer from './jobsReducer';
+import jobs from './jobsReducer';
+import request from './requestReducer';
 
 export default combineReducers({
-  auth: authReducer,
-  jobs: jobsReducer,
+  jobs,
+  request,
 });
