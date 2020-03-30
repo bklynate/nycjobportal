@@ -11,10 +11,8 @@ const App = props => {
   const { routes } = route;
   return (
     <ThemeProvider>
-      <>
-        <Header />
-        {renderRoutes(routes)}
-      </>
+      <Header />
+      {renderRoutes(routes)}
     </ThemeProvider>
   );
 };

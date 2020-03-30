@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import SearchBoxInput from './SearchBoxInput'
+
 
 class Form extends Component {
   state = {
@@ -39,8 +41,7 @@ class Form extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
+          <SearchBoxInput
             autoFocus
             onChange={this.onInputChange}
             placeholder="Enter a keyword to search for jobs"
