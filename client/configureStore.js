@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-// import serialize from 'serialize-javascript';
 import reducers from './reducers';
 
 const middleware = [thunk];
