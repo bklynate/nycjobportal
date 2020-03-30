@@ -12,7 +12,6 @@ const configureStore = (req = { request: { cookies: {} } }) => {
   const isClient = canUseDom();
 
   const preloadedState = {
-    auth: {},
     jobs: {},
     request: {
       cookies: req.request.cookies,
