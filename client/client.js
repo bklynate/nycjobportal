@@ -11,19 +11,22 @@ import Routes from './components/Routes';
 
 const store = configureStore();
 
-function render() {
+function render(routes) {
   ReactDOM.hydrate(
-    <Provider store={store}>
-      <BrowserRouter>{renderRoutes(Routes)}</BrowserRouter>
-    </Provider>,
+    <AppContainer>
+      <Provider store={store}>
+        <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
+      </Provider>
+    </AppContainer>,
     document.getElementById('root')
   );
 }
 
-render();
+render(Routes);
 
-// if (module.hot) {
-//   module.hot.accept('./components/App', () => {
-//     render();
-//   });
-// }
+if (module.hot) {
+  module.hot.accept('./components/Routes.js', () => {
+    const newRoutes = require('./components/Routes.js').default;
+    render(newRoutes);
+  });
+}

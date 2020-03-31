@@ -7,9 +7,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const config = {
   entry: {
     main: [
-      // 'react-hot-loader/patch',
+      'react-hot-loader/patch',
       '@babel/register',
-      'webpack-hot-middleware/client?/http://localhost:5000&reload=true',
+      'webpack-hot-middleware/client?path=http://localhost:5000/__webpack_hmr&reload=true&timeout=1000',
       './client/index.js',
     ],
   },

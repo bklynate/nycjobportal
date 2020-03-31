@@ -9,7 +9,6 @@ const LandingPage = props => {
   const searchQuery = values.q || '';
   return (
     <div>
-      <h1>Landing Page</h1>
       <Form searchQuery={searchQuery} />
       <JobResultsList />
     </div>

@@ -40,8 +40,6 @@ require('./services/passport');
 
 app.use(compression());
 
-app.use(express.static('dist'));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
@@ -64,6 +62,8 @@ if (!isProduction) {
   console.log('....Webpack Dev & Hot Middleware Enabled....');
   console.log('\n');
 }
+
+app.use(express.static('dist'));
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl);
@@ -129,6 +129,7 @@ app.get('/', (request, response) => {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta http-equiv="X-UA-Compatible" content="ie=edge" />
             <link rel="shortcut icon" href="#" />
+            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
             ${mainStyleSheets.map(file => file)}
             <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
           </head>
@@ -154,6 +155,7 @@ app.get('/', (request, response) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="shortcut icon" href="#" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <link href="main.css" rel="stylesheet">
         <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
       </head>
