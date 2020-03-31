@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { Flex, Text, Badge } from '@chakra-ui/core';
 import { connect } from 'react-redux';
 
 class Header extends Component {
@@ -17,19 +18,34 @@ class Header extends Component {
   }
 
   render() {
-    const { request } = this.props;
-    const { cookies } = request;
-    const { asx_data: userToken } = cookies;
+    // const { request } = this.props;
+    // const { cookies } = request;
+    // const { asx_data: userToken } = cookies;
 
     return (
-      <nav>
-        <div>
-          <Link to="/">NYC Job Portal</Link>
-          <ul>
-            <li>{this.renderSignInContent(userToken)}</li>
-          </ul>
-        </div>
-      </nav>
+      <Flex
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        mt={4}
+      >
+        <Flex
+          display="flex"
+          flexDirection="row"
+          alignItems="flex-start"
+          justifyContent="flex-start"
+        >
+          <Text fontSize="3xl" fontWeight="bold">
+            NYC JOB SEARCHER
+          </Text>
+          <Badge variant="subtle" variantColor="pink" ml={1} mt={30}>
+            BETA
+          </Badge>
+        </Flex>
+        <Text color="gray.500">Easily Find City Job Listings</Text>
+      </Flex>
     );
   }
 }
@@ -37,5 +53,12 @@ class Header extends Component {
 const mapStateToProps = state => {
   return state;
 };
-
+// <nav>
+//   <div>
+//     <Link to="/">NYC Job Portal</Link>
+//     <ul>
+//       <li>{this.renderSignInContent(userToken)}</li>
+//     </ul>
+//   </div>
+// </nav>
 export default connect(mapStateToProps)(Header);

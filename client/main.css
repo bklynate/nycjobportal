@@ -1,12 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #e6e6e6;
+  background-color: rgb(255, 255, 255);
   color: #2a2a2a;
   font-size: 25px;
   font-weight: bold;
-  font-family: sans-serif;
-}
-
-.test > h1 {
-  color: blue;
-  font-size: 25px;
+  font-family: Roboto, sans-serif;
 }

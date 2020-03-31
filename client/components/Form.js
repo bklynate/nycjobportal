@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Button, Box } from '@chakra-ui/core';
 import * as actions from '../actions';
-import SearchBoxInput from './SearchBoxInput'
-
+import SearchBoxInput from './SearchBoxInput';
 
 class Form extends Component {
   state = {
@@ -39,7 +39,7 @@ class Form extends Component {
   render() {
     const { jobTitle } = this.state;
     return (
-      <div>
+      <Box d="flex" justifyContent="center">
         <form onSubmit={this.onSubmit}>
           <SearchBoxInput
             autoFocus
@@ -47,9 +47,19 @@ class Form extends Component {
             placeholder="Enter a keyword to search for jobs"
             value={jobTitle}
           />
-          <button>Search Jobs</button>
+          <Button
+            size="xs"
+            width="650px"
+            variant="outline"
+            variantColor="blackAlpha"
+            fontWeight="bold"
+            textAlign="center"
+            onClick={this.onSubmit}
+          >
+            Search Job
+          </Button>
         </form>
-      </div>
+      </Box>
     );
   }
 }
