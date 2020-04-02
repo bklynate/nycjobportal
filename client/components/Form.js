@@ -19,8 +19,8 @@ class Form extends Component {
   }
 
   componentDidCatch(error, info) {
-    console.log('Here is the error: ', error);
-    console.log('Here is the info: ', info);
+    /* eslint-disable-next-line */
+    console.error('Error caught in Form component:: ', error, info, this.props);
   }
 
   onInputChange = e => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../main.css';
 import { connect } from 'react-redux';
 import { ThemeProvider, Flex, Box, theme } from '@chakra-ui/core';
 import { renderRoutes } from 'react-router-config';
