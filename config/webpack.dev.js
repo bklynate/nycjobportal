@@ -9,7 +9,8 @@ const config = {
     main: [
       'react-hot-loader/patch',
       '@babel/register',
-      'webpack-hot-middleware/client?path=http://localhost:5000/__webpack_hmr&reload=true&timeout=1000',
+      'webpack-hot-middleware/client?path=http://localhost:5000/__webpack_hmr&timeout=2000&reload=true',
+      'webpack/hot/only-dev-server',
       './client/index.js',
     ],
   },
@@ -19,9 +20,12 @@ const config = {
     filename: '[name]-bundle.js',
     publicPath: '/',
   },
-  devtool: 'cheap-eval-source-map',
+  devtool: 'eval-cheap-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   devServer: {
     contentBase: 'dist',
