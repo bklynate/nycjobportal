@@ -113,7 +113,9 @@ app.get('/', (request, response) => {
       );
 
     const javascriptAssets = assets
-      .filter(asset => asset.name.includes('.js'))
+      .filter(
+        asset => asset.name.includes('.js') && !asset.name.includes('.json')
+      )
       .map(asset => `<script src="${asset.name}"></script>`);
 
     if (isProduction) {
