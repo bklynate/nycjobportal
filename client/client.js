@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
-import './main.css';
 import configureStore from './configureStore';
 import { renderRoutes } from 'react-router-config';
 import Routes from './components/Routes';
@@ -12,7 +11,7 @@ import Routes from './components/Routes';
 const store = configureStore();
 
 function render(routes) {
-  ReactDOM.hydrate(
+  return ReactDOM.hydrate(
     <AppContainer>
       <Provider store={store}>
         <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>

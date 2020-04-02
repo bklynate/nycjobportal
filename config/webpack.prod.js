@@ -15,7 +15,7 @@ const config = {
     filename: '[name]-bundle.js',
     publicPath: '/',
   },
-  devtool: 'cheap-eval-source-map',
+  devtool: 'cheap-module-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
   },

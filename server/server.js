@@ -105,22 +105,18 @@ app.get('/', (request, response) => {
       </Provider>
     );
 
+    const { assets } = loadable;
+    const cssAssets = assets
+      .filter(asset => asset.name.includes('.css'))
+      .map(
+        asset => `<link href="${asset.name}" rel="stylesheet" type="text/css">`
+      );
+
+    const javascriptAssets = assets
+      .filter(asset => asset.name.includes('.js'))
+      .map(asset => `<script src="${asset.name}"></script>`);
+
     if (isProduction) {
-      const { main, vendor } = loadable.entrypoints;
-      const mainJSFiles = (main.assets || [])
-        .filter(asset => asset.endsWith('.js'))
-        .map(asset => `<script src="${asset}"></script>`);
-      const vendorJSFiles = (vendor.assets || [])
-        .filter(asset => asset.endsWith('.js'))
-        .map(asset => `<script src="${asset}"></script>`);
-      const mainStyleSheets = (main.assets || [])
-        .filter(asset => asset.endsWith('.css'))
-        .map(
-          asset => `<link href="${asset}" rel="stylesheet" type="text/css">`
-        );
-
-      const jsFiles = Array.from(new Set(mainJSFiles, vendorJSFiles));
-
       return response.send(`
         <!DOCTYPE html>
         <html lang="en">
@@ -130,7 +126,7 @@ app.get('/', (request, response) => {
             <meta http-equiv="X-UA-Compatible" content="ie=edge" />
             <link rel="shortcut icon" href="#" />
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-            ${mainStyleSheets.map(file => file)}
+            ${cssAssets.map(file => file)}
             <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
           </head>
           <body>
@@ -141,7 +137,7 @@ app.get('/', (request, response) => {
             <script>
               window.STATE = ${serialize(state)}
             </script>
-            ${jsFiles.map(file => file).join('')}
+            ${javascriptAssets.map(file => file).join('')}
           </body>
         </html>
       `);
@@ -156,7 +152,7 @@ app.get('/', (request, response) => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="shortcut icon" href="#" />
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-        <link href="main.css" rel="stylesheet">
+        ${cssAssets.map(file => file)}
         <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
       </head>
       <body>
@@ -167,7 +163,7 @@ app.get('/', (request, response) => {
         <script>
           window.STATE = ${serialize(state)}
         </script>
-        <script src="main-bundle.js"></script>
+        ${javascriptAssets.map(file => file).join('')}
       </body>
     </html>
   `);
