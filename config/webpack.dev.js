@@ -22,7 +22,7 @@ const config = {
   },
   devtool: 'eval-cheap-source-map',
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json', '.scss'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
     },
@@ -51,10 +51,13 @@ const config = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+            },
           },
           {
             loader: 'css-loader',
@@ -63,6 +66,9 @@ const config = {
                 localIdentName: '[name]__[local]___[hash:base64:5]',
               },
             },
+          },
+          {
+            loader: 'sass-loader',
           },
         ],
       },

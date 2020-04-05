@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+// Set font-size: 62.5% because 62.5% of 16px is 10px. Which makes 1rem = 10px.
+// 16px is the default pixel size of most browsers.
+html {
+  font-size: 62.5%
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+  color: #2a2a2a;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: Roboto, sans-serif;
+  max-width: 1440px;
+}

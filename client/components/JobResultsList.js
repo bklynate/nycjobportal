@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Flex } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/core';
 import JobResultItem from './JobResultItem';
 
 const renderResultsList = props => {
@@ -8,13 +8,9 @@ const renderResultsList = props => {
   return jobs.map((job, index) => <JobResultItem key={index} data={job} />);
 };
 
-const JobsResultsList = props => {
-  return (
-    <Flex flexDirection="row" wrap="wrap" justify="space-between" my={6}>
-      {renderResultsList(props)}
-    </Flex>
-  );
-};
+const JobsResultsList = props => (
+  <Box my="2rem">{renderResultsList(props)}</Box>
+);
 
 const mapStateToProps = state => {
   const { jobs } = state || {};

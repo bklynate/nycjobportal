@@ -34,7 +34,7 @@ const config = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           {
             loader: 'css-loader',
@@ -43,6 +43,9 @@ const config = {
                 localIdentName: '[name]__[local]___[hash:base64:5]',
               },
             },
+          },
+          {
+            loader: 'sass-loader',
           },
         ],
       },

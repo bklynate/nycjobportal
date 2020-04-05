@@ -1,5 +1,5 @@
 import React from 'react';
-import '../main.css';
+import '../main.scss';
 import { connect } from 'react-redux';
 import { ThemeProvider, Flex, Box, theme } from '@chakra-ui/core';
 import { renderRoutes } from 'react-router-config';
@@ -18,7 +18,7 @@ const App = props => {
   const { route } = props;
   const { routes } = route;
   return (
-    <Box maxW="1440px" mx="auto">
+    <Box>
       <ThemeProvider theme={customTheme}>
         <Header />
         <Flex display="flex" flexDirection="column" mt={4}>

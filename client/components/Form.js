@@ -48,15 +48,15 @@ class Form extends Component {
             value={jobTitle}
           />
           <Button
-            size="xs"
-            width="650px"
+            width="65rem"
+            size="lg"
             variant="outline"
             variantColor="blackAlpha"
             fontWeight="bold"
             textAlign="center"
             onClick={this.onSubmit}
           >
-            Search Job
+            Search Jobs
           </Button>
         </form>
       </Box>

@@ -40,7 +40,7 @@ class Header extends Component {
           <Text fontSize="3xl" fontWeight="bold">
             NYC JOB SEARCHER
           </Text>
-          <Badge variant="subtle" variantColor="pink" ml={1} mt={30}>
+          <Badge variant="subtle" variantColor="pink" ml={1} mt="1.8rem">
             BETA
           </Badge>
         </Flex>

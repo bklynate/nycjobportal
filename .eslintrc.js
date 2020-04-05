@@ -23,6 +23,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'react/jsx-props-no-spreading': 1,
     'react/jsx-curly-newline': 1,
+    'react/jsx-one-expression-per-line': 0,
   },
   env: {
     es6: true,
