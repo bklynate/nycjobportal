@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const Dotenv = require('dotenv-webpack');
@@ -36,11 +37,11 @@ const config = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               modules: {
-                onlyLocals: true,
                 localIdentName: '[name]__[local]___[hash:base64:5]',
               },
             },

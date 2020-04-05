@@ -15,7 +15,7 @@
     "build:server:dev:watch": "rm -rf build && webpack --config=config/webpack.server-dev.js --watch server",
     "dev": "npm run build:client:dev && npm run build:server:dev && npm run dev-server",
     "start": "webpack-dev-server --config=config/webpack.dev.js",
-    "prod": "node build/server-bundle.js",
+    "prod": "NODE_ENV=production npm run build:client:prod && npm run build:server:prod && node build/server-bundle.js",
     "upgrade-interactive": "npm-check --update",
     "audit": "npm audit fix",
     "dev-server": "nodemon --inspect --watch build build/server-bundle.js",

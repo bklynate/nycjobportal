@@ -1,6 +1,5 @@
 /* eslint-disable consistent-return */
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import { Flex, Text, Badge } from '@chakra-ui/core';
 import { connect } from 'react-redux';
 
