@@ -1,0 +1,30 @@
+.cardContainer {
+  margin-right: 30px;
+  width: calc((100% - 60px) / 3);
+  display: inline-block;
+
+  p {
+    font-size: 1.3rem;
+  }
+  
+  .jobAttribute {
+    color: #718096;
+  }
+
+  .agencyHeader {
+    .jobAttribute {
+      border-bottom: 0.1rem solid #000;
+      font-size: 1.9rem;
+    }
+  }
+
+  .civilServiceTitle {
+    .jobAttribute {
+      text-transform: capitalize;
+    }
+  }
+}
+
+.cardContainer:nth-of-type(3n + 3) {
+  margin-right: 0px;
+}
