@@ -66,6 +66,7 @@ const config = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
+    new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
@@ -77,7 +78,6 @@ const config = {
         filename: path.resolve(__dirname, '../dist'),
       },
     }),
-    new MiniCssExtractPlugin(),
     new webpack.ProgressPlugin(),
   ],
   optimization: {

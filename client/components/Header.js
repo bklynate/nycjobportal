@@ -17,6 +17,9 @@ class Header extends Component {
   }
 
   render() {
+    // ----------------------------------------------------------------
+    // TODO: Leaving this code here; Will use to wire up authentication
+    // ----------------------------------------------------------------
     // const { request } = this.props;
     // const { cookies } = request;
     // const { asx_data: userToken } = cookies;
@@ -52,12 +55,5 @@ class Header extends Component {
 const mapStateToProps = state => {
   return state;
 };
-// <nav>
-//   <div>
-//     <Link to="/">NYC Job Portal</Link>
-//     <ul>
-//       <li>{this.renderSignInContent(userToken)}</li>
-//     </ul>
-//   </div>
-// </nav>
+
 export default connect(mapStateToProps)(Header);

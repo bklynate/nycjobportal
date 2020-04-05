@@ -3,7 +3,8 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 
-const Dotenv = require('dotenv-webpack');
+// - Uncomment to run production build locally
+// const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: {
@@ -55,12 +56,14 @@ const config = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    new Dotenv(),
+    new MiniCssExtractPlugin(),
+    // - Uncomment to run production build locally
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify('production'),
+    //   },
+    // }),
+    // new Dotenv(),
     new webpack.ProgressPlugin(),
   ],
 };
