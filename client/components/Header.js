@@ -37,7 +37,7 @@ class Header extends Component {
           alignItems="flex-start"
           justifyContent="flex-start"
         >
-          <Text fontSize="3xl" fontWeight="bold">
+          <Text fontSize="2rem" fontWeight="bold" mb={0}>
             NYC JOB SEARCHER
           </Text>
           <Badge variant="subtle" variantColor="pink" ml={1} mt="1.8rem">
