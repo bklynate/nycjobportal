@@ -7,6 +7,7 @@ const nodeExternals = require('webpack-node-externals');
 // - Uncomment to run production build locally
 // -------------------------------------------
 // const Dotenv = require('dotenv-webpack');
+// -------------------------------------------
 
 const config = {
   entry: {
@@ -21,6 +22,11 @@ const config = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      react: 'preact/compat',
+      'react-dom/test-utils': 'preact/test-utils',
+      'react-dom': 'preact/compat',
+    },
   },
   module: {
     rules: [
@@ -68,6 +74,7 @@ const config = {
     //   },
     // }),
     // new Dotenv(),
+    // -------------------------------------------
     new webpack.ProgressPlugin(),
   ],
 };
