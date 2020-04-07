@@ -75,8 +75,6 @@ app.get('/', (request, response) => {
   const store = configureStore({ request });
   const context = {};
 
-  const state = store.getState();
-
   if (context.url) {
     response.redirect(301, context.url);
   }
@@ -87,9 +85,9 @@ app.get('/', (request, response) => {
       return loadData ? loadData(store, request) : null;
     })
     /* eslint-disable-next-line */
-    .map(promise => {
+    .map((promise) => {
       if (promise) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           promise.then(resolve).catch(resolve);
         });
       }
@@ -107,16 +105,20 @@ app.get('/', (request, response) => {
 
     const { assets } = loadable;
     const cssAssets = assets
-      .filter(asset => asset.name.includes('.css'))
+      .filter((asset) => asset.name.includes('.css'))
       .map(
-        asset => `<link href="${asset.name}" rel="stylesheet" type="text/css">`
+        (asset) =>
+          `<link href="${asset.name}" rel="stylesheet" type="text/css">`
       );
 
     const javascriptAssets = assets
       .filter(
-        asset => asset.name.includes('.js') && !asset.name.includes('.json')
+        (asset) =>
+          asset.name.includes('.js') &&
+          !asset.name.includes('.js.map') &&
+          !asset.name.includes('.json')
       )
-      .map(asset => `<script src="${asset.name}"></script>`);
+      .map((asset) => `<script src="${asset.name}"></script>`);
 
     if (isProduction) {
       return response.send(`
@@ -128,7 +130,7 @@ app.get('/', (request, response) => {
             <meta http-equiv="X-UA-Compatible" content="ie=edge" />
             <link rel="shortcut icon" href="#" />
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-            ${cssAssets.map(file => file)}
+            ${cssAssets.map((file) => file)}
             <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
           </head>
           <body>
@@ -137,9 +139,9 @@ app.get('/', (request, response) => {
             </noscript>
             <div id="root">${html}</div>
             <script>
-              window.STATE = ${serialize(state)}
+              window.STATE = ${serialize(store.getState())}
             </script>
-            ${javascriptAssets.map(file => file).join('')}
+            ${javascriptAssets.map((file) => file).join('')}
           </body>
         </html>
       `);
@@ -154,7 +156,7 @@ app.get('/', (request, response) => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="shortcut icon" href="#" />
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-        ${cssAssets.map(file => file)}
+        ${cssAssets.map((file) => file)}
         <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
       </head>
       <body>
@@ -163,9 +165,9 @@ app.get('/', (request, response) => {
         </noscript>
         <div id="root">${html}</div>
         <script>
-          window.STATE = ${serialize(state)}
+          window.STATE = ${serialize(store.getState())}
         </script>
-        ${javascriptAssets.map(file => file).join('')}
+        ${javascriptAssets.map((file) => file).join('')}
       </body>
     </html>
   `);

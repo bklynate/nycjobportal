@@ -3,7 +3,9 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 
+// -------------------------------------------
 // - Uncomment to run production build locally
+// -------------------------------------------
 // const Dotenv = require('dotenv-webpack');
 
 const config = {
@@ -57,7 +59,9 @@ const config = {
   plugins: [
     new webpack.NamedModulesPlugin(),
     new MiniCssExtractPlugin(),
+    // -------------------------------------------
     // - Uncomment to run production build locally
+    // -------------------------------------------
     // new webpack.DefinePlugin({
     //   'process.env': {
     //     NODE_ENV: JSON.stringify('production'),
