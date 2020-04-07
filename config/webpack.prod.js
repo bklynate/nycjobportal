@@ -6,7 +6,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
   entry: {
-    vendor: ['react', 'react-dom'],
+    vendor: ['preact', 'react', 'react-dom'],
     main: ['./client/index.js'],
   },
   mode: 'production',
@@ -18,6 +18,11 @@ const config = {
   devtool: 'cheap-module-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      react: 'preact/compat',
+      'react-dom/test-utils': 'preact/test-utils',
+      'react-dom': 'preact/compat',
+    },
   },
   module: {
     rules: [
