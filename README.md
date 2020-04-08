@@ -1,6 +1,6 @@
 # NYC JOB PORTAL
 
-This web application is built with React, Redux, Webpack, Prettier, Eslint, Babel, and Express.
+This web application is built with Preact X, React, Redux, Webpack, Prettier, Eslint, Babel, and Express.
 
 ## Installation
 
