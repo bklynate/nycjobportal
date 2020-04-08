@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Box } from '@chakra-ui/core';
-import * as actions from '../actions';
-import SearchBoxInput from './SearchBoxInput';
+import * as actions from '../../actions';
+import SearchBoxInput from '../SearchBoxInput';
+import styles from './styles.scss';
 
 class Form extends Component {
   state = {
@@ -23,12 +24,12 @@ class Form extends Component {
     console.error('Error caught in Form component:: ', error, info, this.props);
   }
 
-  onInputChange = e => {
+  onInputChange = (e) => {
     const jobTitle = e.target.value;
     this.setState({ jobTitle });
   };
 
-  onSubmit = async e => {
+  onSubmit = async (e) => {
     e.preventDefault();
     const { fetchKeywordJobs, history } = this.props;
     const { jobTitle } = this.state;
@@ -39,8 +40,8 @@ class Form extends Component {
   render() {
     const { jobTitle } = this.state;
     return (
-      <Box d="flex" justifyContent="center">
-        <form onSubmit={this.onSubmit}>
+      <Box d="flex" justifyContent={['initial', 'center']}>
+        <form className={styles.form} onSubmit={this.onSubmit}>
           <SearchBoxInput
             autoFocus
             onChange={this.onInputChange}
@@ -48,7 +49,7 @@ class Form extends Component {
             value={jobTitle}
           />
           <Button
-            width="65rem"
+            width={['100%', '65rem']}
             size="lg"
             variant="outline"
             variantColor="blackAlpha"

@@ -1,0 +1,9 @@
+@import '../../assets/stylesheets/breakpointMixins';
+
+.form {
+  width: 100%;
+
+  @include tablet {
+    width: initial;
+  }
+}

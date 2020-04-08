@@ -1,5 +1,5 @@
 import React from 'react';
-import '../main.scss';
+import '../assets/stylesheets/global.scss';
 import { connect } from 'react-redux';
 import { ThemeProvider, Flex, Box, theme } from '@chakra-ui/core';
 import { renderRoutes } from 'react-router-config';
@@ -14,7 +14,7 @@ const customTheme = {
   },
 };
 
-const App = props => {
+const App = (props) => {
   const { route } = props;
   const { routes } = route;
   return (
