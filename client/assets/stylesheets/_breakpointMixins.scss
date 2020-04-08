@@ -1,0 +1,38 @@
+@import '../stylesheets/breakpoints';
+
+// Mobile devices
+@mixin mobile {
+  @media (min-width: #{$mobile}) {
+    @content;
+  }
+}
+
+// Tablet devices
+@mixin tablet {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+// Small desktop devices
+@mixin small-desktop {
+  @media (min-width: #{$small-desktop}) {
+    @content;
+  }
+}
+
+// Medium desktop devices
+@mixin medium-desktop {
+  @media (min-width: #{$medium-desktop}) {
+    @content;
+  }
+}
+
+// Large desktop devices
+@mixin large-desktop {
+  @media (min-width: #{$large-desktop}) {
+    @content;
+  }
+}
+
+

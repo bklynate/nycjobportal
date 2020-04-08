@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 // -------------------------------------------
@@ -46,10 +45,10 @@ const config = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
+              onlyLocals: true,
               modules: {
                 localIdentName: '[name]__[local]___[hash:base64:5]',
               },
@@ -64,7 +63,6 @@ const config = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new MiniCssExtractPlugin(),
     // -------------------------------------------
     // - Uncomment to run production build locally
     // -------------------------------------------
