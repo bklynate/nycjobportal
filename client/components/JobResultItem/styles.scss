@@ -1,12 +1,21 @@
+@import '../../assets/stylesheets/breakpointMixins';
+
 .cardContainer {
-  margin-right: 30px;
-  width: calc((100% - 60px) / 3);
-  display: inline-block;
+  @include tablet {
+    margin-right: 45px;
+    width: calc((100% - 90px) / 2);
+    display: inline-block;
+  }
+
+  @include medium-desktop {
+    margin-right: 30px;
+    width: calc((100% - 60px) / 3);
+  }
 
   p {
     font-size: 1.3rem;
   }
-  
+
   .jobAttribute {
     color: #718096;
   }
@@ -26,5 +35,7 @@
 }
 
 .cardContainer:nth-of-type(3n + 3) {
-  margin-right: 0px;
+  @include medium-desktop {
+    margin-right: 0px;
+  }
 }
