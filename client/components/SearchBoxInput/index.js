@@ -9,7 +9,6 @@ const SearchBoxInput = (props) => {
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        width={['100%', '65rem']}
         variant="outline"
         size="lg"
         fontSize="1.5rem"

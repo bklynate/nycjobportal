@@ -1,3 +1,5 @@
+@import './breakpointMixins';
+
 * {
   box-sizing: border-box;
 }
@@ -9,10 +11,23 @@ html {
 }
 
 body {
+  /* Mobile */
   background-color: rgb(255, 255, 255);
   color: #2a2a2a;
   font-size: 25px;
   font-weight: bold;
   font-family: Roboto, sans-serif;
   max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 21px;
+
+  /* Tablet */
+  @include tablet {
+    padding: 0 45px;
+  }
+
+  /* Medium desktop on up */
+  @include medium-desktop {
+    padding: 0 20px;
+  }
 }
