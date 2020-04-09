@@ -4,6 +4,10 @@
   width: 100%;
 
   @include tablet {
-    width: initial;
+    width: 65rem;
+  }
+
+  .button {
+    width: inherit;
   }
 }

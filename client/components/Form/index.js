@@ -49,7 +49,7 @@ class Form extends Component {
             value={jobTitle}
           />
           <Button
-            width={['100%', '65rem']}
+            className={styles.button}
             size="lg"
             variant="outline"
             variantColor="blackAlpha"
