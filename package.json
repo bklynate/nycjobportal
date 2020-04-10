@@ -42,7 +42,7 @@
     "concurrently": "^5.1.0",
     "cookie-parser": "^1.4.5",
     "cookie-session": "^1.4.0",
-    "core-js": "^3.6.4",
+    "core-js": "^3.6.5",
     "dotenv-webpack": "^1.7.0",
     "emotion-theming": "^10.0.27",
     "eslint-plugin-jsx-a11y": "^6.2.3",
