@@ -50,7 +50,7 @@ app.use(
     name: 'auth-0',
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [cookieKey],
-    sameSite: true,
+    sameSite: 'none',
     secure: isProduction,
   })
 );
@@ -74,7 +74,7 @@ mongoose.connect(mongoUrl);
 authRoutes(app);
 jobRoutes(app);
 
-app.get('/', (request, response) => {
+app.get('*', (request, response) => {
   const store = configureStore({ request });
   const context = {};
 
@@ -105,12 +105,12 @@ app.get('/', (request, response) => {
       .filter((asset) => asset.name.endsWith('.css'))
       .map(
         (asset) =>
-          `<link href="${asset.name}" rel="stylesheet" type="text/css">`
+          `<link href="/${asset.name}" rel="stylesheet" type="text/css">`
       );
 
     const javascriptAssets = assets
       .filter((asset) => asset.name.endsWith('.js'))
-      .map((asset) => `<script src="${asset.name}"></script>`);
+      .map((asset) => `<script src="/${asset.name}"></script>`);
 
     if (isProduction) {
       return response.send(`
