@@ -14,6 +14,7 @@ const config = {
   output: {
     path: path.join(__dirname, '../build'),
     filename: 'server-bundle.js',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],

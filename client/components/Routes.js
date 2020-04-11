@@ -2,6 +2,7 @@ import React from 'react'; // eslint-disable-line
 
 import App from './App';
 import LandingPage from './LandingPage';
+import JobListingPage from './JobListingPage';
 import Form, { loadData as formLoadData } from './Form';
 import NotFoundPage from './NotFoundPage';
 
@@ -19,6 +20,11 @@ export default [
             loadData: formLoadData,
           },
         ],
+      },
+      {
+        path: '/job-listing/:id',
+        exact: true,
+        component: JobListingPage,
       },
       {
         path: '*',
