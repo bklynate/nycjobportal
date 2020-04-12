@@ -34,7 +34,11 @@ const JobListingPage = (props) => {
         {lowercaseAgency} / {jobCategory}
       </h2>
       <p>{sanitizedJobDescriptionText}</p>
-      <a href={`${applyToJobBaseURL}JobOpeningId=${jobID}`}>
+      <a
+        href={`${applyToJobBaseURL}JobOpeningId=${jobID}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Button>Apply Now</Button>
       </a>
     </div>
