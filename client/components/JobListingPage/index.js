@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './styles.scss';
 
 const sanitizeJobDescriptionText = (jobDescriptionText) => {
   return jobDescriptionText.replace(/[^a-zA-Z0-9 ]/g, '');
@@ -9,21 +10,23 @@ const JobListingPage = (props) => {
   const { state } = location;
   const { jobListing } = state || {};
   const {
-    agency = null,
-    businessTitle = null,
-    jobCategory = null,
+    agency = '',
+    businessTitle = '',
+    jobCategory = '',
     jobDescription = '',
   } = jobListing || {};
+
+  const lowercaseAgency = agency.toLowerCase();
 
   const sanitizedJobDescriptionText = sanitizeJobDescriptionText(
     jobDescription
   );
 
   return (
-    <div>
+    <div className={styles.jobListingContainer}>
       <h1>{businessTitle}</h1>
       <h2>
-        {agency} / {jobCategory}
+        {lowercaseAgency} / {jobCategory}
       </h2>
       <p>{sanitizedJobDescriptionText}</p>
     </div>

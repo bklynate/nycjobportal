@@ -123,6 +123,7 @@ app.get('*', (request, response) => {
             <link rel="shortcut icon" href="#" />
             <script data-ad-client="ca-pub-7103668196140065" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
             ${cssAssets.map((file) => file).join('\n')}
             <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
           </head>
@@ -150,6 +151,7 @@ app.get('*', (request, response) => {
           <link rel="shortcut icon" href="#" />
           <script data-ad-client="ca-pub-7103668196140065" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
           ${cssAssets.map((file) => file).join('\n')}
           <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
         </head>
