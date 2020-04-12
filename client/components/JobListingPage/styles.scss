@@ -1,0 +1,21 @@
+.jobListingContainer {
+  h1 {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-size: 2rem;
+    margin-bottom: 5rem;
+    text-transform: capitalize;
+  }
+
+  p {
+    font-weight: 100;
+    font-size: 1.6rem;
+    letter-spacing: 0.1rem;
+    font-family: 'Merriweather', serif;
+    margin-top: 0;
+    line-height: 2.3rem;
+  }
+}
