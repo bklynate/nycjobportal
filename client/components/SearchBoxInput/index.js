@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Flex } from '@chakra-ui/core';
 
-const SearchBoxInput = (props) => {
+const SearchBoxInput = props => {
   const { value, placeholder, onChange } = props;
   return (
     <Flex justifyContent="center" mb="1.3rem">

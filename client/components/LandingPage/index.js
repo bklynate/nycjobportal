@@ -1,9 +1,9 @@
 import React from 'react';
 import queryString from 'query-string';
-import Form from './Form';
-import SearchResultsList from './SearchResultsList';
+import Form from '../Form';
+import SearchResultsList from '../SearchResultsList';
 
-const LandingPage = (props) => {
+const LandingPage = props => {
   const { location } = props;
   const values = queryString.parse(location.search);
   const searchQuery = values.q || '';

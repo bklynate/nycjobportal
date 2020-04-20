@@ -24,12 +24,12 @@ class Form extends Component {
     console.error('Error caught in Form component:: ', error, info, this.props);
   }
 
-  onInputChange = (e) => {
+  onInputChange = e => {
     const jobTitle = e.target.value;
     this.setState({ jobTitle });
   };
 
-  onSubmit = async (e) => {
+  onSubmit = async e => {
     e.preventDefault();
     const { fetchKeywordJobs, history } = this.props;
     const { jobTitle } = this.state;

@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { Box, Badge, Text } from '@chakra-ui/core';
 import styles from './styles.scss';
 
-const formatFullTimePartTimeIndicator = (fullTimePartTimeIndicator) => {
+const formatFullTimePartTimeIndicator = fullTimePartTimeIndicator => {
   if (fullTimePartTimeIndicator === 'F') return 'Full Time';
   if (fullTimePartTimeIndicator === 'P') return 'Part Time';
   return null;
 };
 
-const JobResultItem = (props) => {
+const JobResultItem = props => {
   const { data } = props;
 
   const {
