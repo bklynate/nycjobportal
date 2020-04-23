@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -27,7 +25,6 @@ import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobsApi';
 
 import loadable from '../dist/loadable.json';
-import { loadData } from '../client/components/Form';
 
 const app = express();
 const compiler = webpack(config);
@@ -86,7 +83,7 @@ app.get('*', (request, response) => {
   const preloadedDataByRoute = matchRoutes(Routes, request.path)
     .filter(({ route }) => route.loadData)
     .map(async ({ route }) => {
-      const loadedData = await loadData(store, request);
+      const loadedData = await route.loadData(store, request);
       return loadedData;
     });
 
