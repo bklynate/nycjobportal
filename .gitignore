@@ -4,3 +4,4 @@ dist
 server/config/dev.js
 build
 .env
+coverage/
