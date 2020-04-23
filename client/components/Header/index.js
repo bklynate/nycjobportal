@@ -42,7 +42,7 @@ class Header extends Component {
           <Text fontSize="2rem" fontWeight="bold" mb={0}>
             NYC JOB SEARCHER
           </Text>
-          <Badge variant="subtle" variantColor="pink" ml={1} mt="1.8rem">
+          <Badge variant="subtle" variantColor="red" ml={1} mt="1.8rem">
             BETA
           </Badge>
         </Flex>
@@ -55,5 +55,7 @@ class Header extends Component {
 const mapStateToProps = state => {
   return state;
 };
+
+export { Header };
 
 export default connect(mapStateToProps)(Header);

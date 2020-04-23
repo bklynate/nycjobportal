@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header optimal case should match snapshot 1`] = `
+<DocumentFragment>
+  .emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-0 {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.emotion-1 {
+  display: inline-block;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  border-radius: 0.125rem;
+  font-weight: 700;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #fed7d7;
+  color: #822727;
+  margin-left: 0.25rem;
+  margin-top: 1.8rem;
+}
+
+.emotion-3 {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  color: #718096;
+}
+
+<div
+    class="emotion-4"
+  >
+    <div
+      class="emotion-2"
+    >
+      <p
+        class="emotion-0"
+      >
+        NYC JOB SEARCHER
+      </p>
+      <div
+        class="emotion-1"
+      >
+        BETA
+      </div>
+    </div>
+    <p
+      class="emotion-3"
+    >
+      Easily Find City Job Listings
+    </p>
+  </div>
+</DocumentFragment>
+`;

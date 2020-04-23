@@ -50,7 +50,7 @@ app.use(
     name: 'auth-0',
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [cookieKey],
-    sameSite: 'none',
+    sameSite: 'None',
     secure: isProduction,
   })
 );
@@ -102,15 +102,14 @@ app.get('*', (request, response) => {
 
     const { assets } = loadable;
     const cssAssets = assets
-      .filter((asset) => asset.name.endsWith('.css'))
+      .filter(asset => asset.name.endsWith('.css'))
       .map(
-        (asset) =>
-          `<link href="/${asset.name}" rel="stylesheet" type="text/css">`
+        asset => `<link href="/${asset.name}" rel="stylesheet" type="text/css">`
       );
 
     const javascriptAssets = assets
-      .filter((asset) => asset.name.endsWith('.js'))
-      .map((asset) => `<script src="/${asset.name}"></script>`);
+      .filter(asset => asset.name.endsWith('.js'))
+      .map(asset => `<script src="/${asset.name}"></script>`);
 
     if (isProduction) {
       return response.send(`
@@ -124,7 +123,7 @@ app.get('*', (request, response) => {
             <script data-ad-client="ca-pub-7103668196140065" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
-            ${cssAssets.map((file) => file).join('\n')}
+            ${cssAssets.map(file => file).join('\n')}
             <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
           </head>
           <body>
@@ -135,7 +134,7 @@ app.get('*', (request, response) => {
             <script>
               window.STATE = ${serialize(store.getState())}
             </script>
-            ${javascriptAssets.map((file) => file).join('\n')}
+            ${javascriptAssets.map(file => file).join('\n')}
           </body>
         </html>
       `);
@@ -152,7 +151,7 @@ app.get('*', (request, response) => {
           <script data-ad-client="ca-pub-7103668196140065" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
           <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
-          ${cssAssets.map((file) => file).join('\n')}
+          ${cssAssets.map(file => file).join('\n')}
           <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
         </head>
         <body>
@@ -163,7 +162,7 @@ app.get('*', (request, response) => {
           <script>
             window.STATE = ${serialize(store.getState())}
           </script>
-          ${javascriptAssets.map((file) => file).join('\n')}
+          ${javascriptAssets.map(file => file).join('\n')}
         </body>
       </html>
     `);
