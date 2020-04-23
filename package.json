@@ -134,6 +134,9 @@
         "testEnvironment": "jsdom",
         "setupFiles": [
           "<rootDir>/setupJest"
+        ],
+        "snapshotSerializers": [
+          "jest-emotion"
         ]
       },
       {
