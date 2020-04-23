@@ -122,8 +122,12 @@
     }
   },
   "jest": {
+    "collectCoverage": true,
     "collectCoverageFrom": [
-      "<rootDir>/server/**/*.js"
+      "<rootDir>/server/**/*.js",
+      "<rootDir>/client/actions/**/*.js",
+      "<rootDir>/client/components/**/*.js",
+      "<rootDir>/client/reducers/**/*.js"
     ],
     "projects": [
       {
