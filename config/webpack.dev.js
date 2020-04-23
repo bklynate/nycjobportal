@@ -9,7 +9,7 @@ const config = {
     main: [
       'react-hot-loader/patch',
       '@babel/register',
-      'webpack-hot-middleware/client?path=http://localhost:5000/__webpack_hmr&timeout=2000&reload=true',
+      'webpack-hot-middleware/client?timeout=2000&reload=true',
       'webpack/hot/only-dev-server',
       './client/index.js',
     ],

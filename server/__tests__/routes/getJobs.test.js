@@ -1,4 +1,4 @@
-import { getJobs } from '../../server/routes/getJobs';
+import { getJobs } from '../../routes/getJobs';
 import mockGetJobs from '../mocks/getJobs';
 import {
   getJobsResponse,
