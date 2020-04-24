@@ -140,7 +140,7 @@
       {
         "displayName": "client",
         "testMatch": [
-          "<rootDir>/client/components/**/__tests__/**/*.test.js?(x)"
+          "<rootDir>/client/**/__tests__/**/*.test.js?(x)"
         ],
         "testEnvironment": "jsdom",
         "setupFiles": [
