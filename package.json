@@ -126,8 +126,15 @@
     "collectCoverageFrom": [
       "<rootDir>/server/**/*.js",
       "!<rootDir>/server/__tests__/**/*.js",
+
       "<rootDir>/client/components/**/*.js",
-      "!<rootDir>/client/components/**/__tests__/**/*.js"
+      "!<rootDir>/client/components/**/__tests__/**/*.js",
+
+      "<rootDir>/client/actions/**/*.js",
+      "!<rootDir>/client/actions/__tests__/**/*.js",
+
+      "<rootDir>/client/reducers/**/*.js",
+      "!<rootDir>/client/reducers/__tests__/**/*.js"
     ],
     "projects": [
       {
