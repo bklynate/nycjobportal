@@ -41,11 +41,27 @@ _For more information on generating Google API keys follow the following guide_:
 
 ## Build Scripts
 
-### \***\*Once you have secured all of the necessary API keys You Should Be Able To:\*\***
+### **Once you have secured all of the necessary API keys:**
 
-- Build a **dev** version of the application by running `npm run build:client:dev && npm run build:server:dev && npm run dev-server`.
+- Build a **dev** version of the application by running `npm run dev`.
 
-- Build a **prod** version of the application by running `npm run build:client:prod && npm run build:server:prod && npm run prod`.
+####  **BEFORE BUILDING A PRODUCTION BUILD LOCALLY**
+Inside `config/webpack.server.js` you will need to uncomment the following lines:
+``` 
+// const Dotenv = require('dotenv-webpack');
+... 
+plugins: [
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify('production'),
+    //   },
+    // }),
+    // new Dotenv(),
+]
+```
+- Build a **prod** version of the application by running `npm run prod`.
+
+*Don't forget to comment out those lines if you fork and decide to deploy this application to Heroku.*
 
 ## Contributing
 
