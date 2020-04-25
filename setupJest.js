@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render as testRender } from '@testing-library/react';
 import { ThemeProvider, theme } from '@chakra-ui/core';
 
@@ -13,7 +14,9 @@ require('dotenv').config();
 
 const render = Component => {
   return testRender(
-    <ThemeProvider theme={customTheme}>{Component}</ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={customTheme}>{Component}</ThemeProvider>
+    </BrowserRouter>
   );
 };
 
