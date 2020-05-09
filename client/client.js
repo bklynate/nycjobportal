@@ -4,20 +4,23 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import { renderRoutes } from 'react-router-config';
+import { loadableReady } from '@loadable/component';
 import configureStore from './configureStore';
 import Routes from './components/Routes';
 
 const store = configureStore();
 
 function render(routes) {
-  return ReactDOM.hydrate(
-    <AppContainer>
-      <Provider store={store}>
-        <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
-      </Provider>
-    </AppContainer>,
-    document.getElementById('root')
-  );
+  return loadableReady(() => {
+    ReactDOM.hydrate(
+      <AppContainer>
+        <Provider store={store}>
+          <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
+        </Provider>
+      </AppContainer>,
+      document.getElementById('root')
+    );
+  });
 }
 
 render(Routes);

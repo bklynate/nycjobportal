@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const Dotenv = require('dotenv-webpack');
@@ -10,7 +11,7 @@ const config = {
   },
   mode: 'development',
   target: 'node',
-  externals: nodeExternals(),
+  externals: ['@loadable/component', nodeExternals()],
   output: {
     path: path.join(__dirname, '../build'),
     filename: 'server-bundle.js',
@@ -57,6 +58,9 @@ const config = {
     ],
   },
   plugins: [
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -65,7 +69,12 @@ const config = {
     }),
     new Dotenv(),
     new webpack.ProgressPlugin(),
+    new LoadablePlugin(),
   ],
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
 };
 
 module.exports = config;

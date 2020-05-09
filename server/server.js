@@ -1,9 +1,9 @@
+import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes, matchRoutes } from 'react-router-config';
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
@@ -17,15 +17,14 @@ import serialize from 'serialize-javascript';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
+import { ChunkExtractor } from '@loadable/server';
 import config from '../config/webpack.dev';
 
 import configureStore from '../client/configureStore';
 import Routes from '../client/components/Routes';
 import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobsApi';
-
-import loadable from '../dist/loadable.json';
-
+// import loadable from '../dist/loadable.json';
 const app = express();
 const compiler = webpack(config);
 const isProduction = process.env.NODE_ENV === 'production';
@@ -35,6 +34,9 @@ const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/bp_db';
 const cookieKey = process.env.COOKIE_KEY;
 
 /* ORDER MATTERS ! */
+app.use(express.static('dist'));
+mongoose.Promise = global.Promise;
+mongoose.connect(mongoUrl);
 require('./models/User');
 require('./services/passport');
 
@@ -54,7 +56,6 @@ app.use(
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
-
 if (!isProduction) {
   app.use(webpackDevMiddleware(compiler, config.devServer));
   app.use(webpackHotMiddleware(compiler));
@@ -63,22 +64,17 @@ if (!isProduction) {
   console.log('\n');
 }
 
-app.use(express.static('dist'));
-
-mongoose.Promise = global.Promise;
-mongoose.connect(mongoUrl);
-
 authRoutes(app);
 jobRoutes(app);
+const nodeStats = path.join(__dirname, '../build/loadable-stats.json');
+const webStats = path.join(__dirname, '../dist/loadable.json');
 
 app.get('*', (request, response) => {
   const store = configureStore({ request });
   const context = {};
-
   if (context.url) {
     response.redirect(301, context.url);
   }
-
   // This code is taken from https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
   const preloadedDataByRoute = matchRoutes(Routes, request.path)
     .filter(({ route }) => route.loadData)
@@ -89,25 +85,37 @@ app.get('*', (request, response) => {
 
   /* eslint-disable-next-line */
   Promise.all(preloadedDataByRoute).then(() => {
-    const html = ReactDOMServer.renderToString(
+    const nodeExtractor = new ChunkExtractor({
+      statsFile: nodeStats,
+      entrypoints: ['server'],
+    });
+    const { default: App } = nodeExtractor.requireEntrypoint();
+    console.log('Here is the ', App);
+    const webExtractor = new ChunkExtractor({
+      statsFile: webStats,
+    });
+    const jsx = webExtractor.collectChunks(
       <Provider store={store}>
         <StaticRouter location={request.path} context={context}>
           {renderRoutes(Routes)}
         </StaticRouter>
       </Provider>
     );
-
-    const { assets } = loadable;
-    const cssAssets = assets
-      .filter(asset => asset.name.endsWith('.css'))
-      .map(
-        asset => `<link href="/${asset.name}" rel="stylesheet" type="text/css">`
-      );
-
-    const javascriptAssets = assets
-      .filter(asset => asset.name.endsWith('.js'))
-      .map(asset => `<script src="/${asset.name}"></script>`);
-
+    const renderedJSX = ReactDOMServer.renderToString(jsx);
+    // const { assets } = loadable;
+    // const cssAssets = assets
+    //   .filter(asset => asset.name.endsWith('.css'))
+    //   .map(
+    //     asset => `<link href="/${asset.name}" rel="stylesheet" type="text/css">`
+    //   );
+    // const javascriptAssets = assets
+    //   .filter(asset => asset.name.endsWith('.js'))
+    //   .map(asset => `<script src="/${asset.name}"></script>`);
+    const scriptTags = webExtractor.getScriptTags(); // or extractor.getScriptElements();
+    // // You can also collect your "preload/prefetch" links
+    const linkTags = webExtractor.getLinkTags(); // or extractor.getLinkElements();
+    // And you can even collect your style tags (if you use "mini-css-extract-plugin")
+    const styleTags = webExtractor.getStyleTags();
     if (isProduction) {
       return response.send(`
         <!DOCTYPE html>
@@ -127,7 +135,7 @@ app.get('*', (request, response) => {
             <noscript>
               You need to enable JavaScript to run this app.
             </noscript>
-            <div id="root">${html}</div>
+            <div id="root">${jsx}</div>
             <script>
               window.STATE = ${serialize(store.getState())}
             </script>
@@ -148,22 +156,22 @@ app.get('*', (request, response) => {
           <script data-ad-client="ca-pub-7103668196140065" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
           <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
-          ${cssAssets.map(file => file).join('\n')}
+          ${linkTags}
+          ${styleTags}
           <title>NYC Job Portal - Helping Folks Find NYC City Jobs</title>
         </head>
         <body>
           <noscript>
             You need to enable JavaScript to run this app.
           </noscript>
-          <div id="root">${html}</div>
+          <div id="root">${renderedJSX}</div>
           <script>
             window.STATE = ${serialize(store.getState())}
           </script>
-          ${javascriptAssets.map(file => file).join('\n')}
+          ${scriptTags}
         </body>
       </html>
     `);
   });
 });
-
 app.listen(PORT, () => console.log(`They came from http://localhost:${PORT}`)); // eslint-disable-line
