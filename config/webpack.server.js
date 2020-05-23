@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-// const LoadablePlugin = require('@loadable/webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 // -------------------------------------------
@@ -10,13 +9,12 @@ const nodeExternals = require('webpack-node-externals');
 // -------------------------------------------
 
 const config = {
-  context: './',
   entry: {
     server: ['./server/index.js'],
   },
   mode: 'production',
   target: 'node',
-  externals: ['@loadable/component', nodeExternals()],
+  externals: nodeExternals(),
   output: {
     path: path.join(__dirname, '../build'),
     filename: '[name]-bundle.js',
@@ -65,9 +63,6 @@ const config = {
     ],
   },
   plugins: [
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1,
-    }),
     new webpack.NamedModulesPlugin(),
     // -------------------------------------------
     // - Uncomment to run production build locally
@@ -81,6 +76,9 @@ const config = {
     // -------------------------------------------
     new webpack.ProgressPlugin(),
   ],
+  node: {
+    __dirname: false,
+  },
 };
 
 module.exports = config;
