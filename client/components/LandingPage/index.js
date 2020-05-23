@@ -1,7 +1,9 @@
 import React from 'react';
 import queryString from 'query-string';
+import loadable from '@loadable/component';
 import Form from '../Form';
-import SearchResultsList from '../SearchResultsList';
+
+const SearchResultsList = loadable(() => import('../SearchResultsList'));
 
 const LandingPage = props => {
   const { location } = props;

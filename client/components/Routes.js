@@ -1,10 +1,14 @@
 import React from 'react'; // eslint-disable-line
 
+import loadable from '@loadable/component';
+
 import App from './App';
 import LandingPage from './LandingPage';
-import JobListingPage from './JobListingPage';
+
 import Form, { loadData as formLoadData } from './Form';
-import NotFoundPage from './NotFoundPage';
+
+const NotFoundPage = loadable(() => import('./NotFoundPage'));
+const JobListingPage = loadable(() => import('./JobListingPage'));
 
 export default [
   {
