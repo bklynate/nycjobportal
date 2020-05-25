@@ -10,7 +10,7 @@ export default app => {
     }
   });
 
-  app.post('/api/getjobbykeyword', async (req, res) => {
+  app.post('/api/get-job-by-keyword', async (req, res) => {
     try {
       const { keyword } = req.body;
       const { data } = await getJobs(keyword);

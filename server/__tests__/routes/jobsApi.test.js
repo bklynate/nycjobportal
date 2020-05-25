@@ -17,10 +17,10 @@ describe('jobsApi', () => {
     });
   });
 
-  describe('/api/getjobbykeyword', () => {
+  describe('/api/get-job-by-keyword', () => {
     it('repond with a 200', async () => {
       const result = await axios.post(
-        `${global.internalBaseUrl}/api/getjobbykeyword`,
+        `${global.internalBaseUrl}/api/get-job-by-keyword`,
         { keyword: global.searchTerm }
       );
       expect(result.status).toEqual(200);
