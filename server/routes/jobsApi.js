@@ -19,6 +19,7 @@ export default app => {
       res.status(500).json({ message: error });
     }
   });
+
   app.post('/api/get-single-job-listing', async (req, res) => {
     try {
       const { keyword } = req.body;
