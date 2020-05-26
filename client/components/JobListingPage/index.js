@@ -45,4 +45,13 @@ const JobListingPage = props => {
   );
 };
 
+// const loadData = (store, request) => {
+//   // const { query } = request || {};
+//   // const { q: queryString } = query || {};
+//   // return store.dispatch(actions.fetchKeywordJobs(queryString));
+//   console.log('Here is the request :: ', { request})
+// };
+
+// export { loadData }
+
 export default JobListingPage;
