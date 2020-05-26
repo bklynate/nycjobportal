@@ -6,9 +6,9 @@ import {
 
 const mockJobsApi = () =>
   nock(global.internalBaseUrl, { encodedQueryParams: true })
-    .get('/api/alljobs')
+    .get('/api/get-all-jobs')
     .reply(200, getJobsResponse)
-    .post('/api/get-job-by-keyword')
+    .post('/api/get-jobs-by-keyword')
     .reply(200, getJobsBySearchResponse);
 
 export default mockJobsApi;

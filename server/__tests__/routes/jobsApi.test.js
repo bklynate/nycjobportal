@@ -9,18 +9,20 @@ describe('jobsApi', () => {
   beforeEach(() => {
     mockJobsApi();
   });
-  describe('/api/alljobs', () => {
+  describe('/api/get-all-jobs', () => {
     it('repond with a 200', async () => {
-      const result = await axios.get(`${global.internalBaseUrl}/api/alljobs`);
+      const result = await axios.get(
+        `${global.internalBaseUrl}/api/get-all-jobs`
+      );
       expect(result.status).toEqual(200);
       expect(result.data).toMatchObject(getJobsResponse);
     });
   });
 
-  describe('/api/get-job-by-keyword', () => {
+  describe('/api/get-jobs-by-keyword', () => {
     it('repond with a 200', async () => {
       const result = await axios.post(
-        `${global.internalBaseUrl}/api/get-job-by-keyword`,
+        `${global.internalBaseUrl}/api/get-jobs-by-keyword`,
         { keyword: global.searchTerm }
       );
       expect(result.status).toEqual(200);

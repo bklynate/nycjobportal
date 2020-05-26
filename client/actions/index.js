@@ -8,13 +8,13 @@ const axiosWithBaseURL = axios.create({
 });
 
 export const fetchAllJobs = () => async dispatch => {
-  const response = await axiosWithBaseURL.get('/api/alljobs');
+  const response = await axiosWithBaseURL.get('/api/get-all-jobs');
   await dispatch({ type: FETCH_ALL_JOBS, payload: response.data });
 };
 
 export const fetchKeywordJobs = keyword => async dispatch => {
   if (!keyword) return;
-  const response = await axiosWithBaseURL.post('/api/get-job-by-keyword', {
+  const response = await axiosWithBaseURL.post('/api/get-jobs-by-keyword', {
     keyword,
   });
   // eslint-disable-next-line
