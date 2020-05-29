@@ -15,7 +15,6 @@ import compression from 'compression';
 import serialize from 'serialize-javascript';
 
 import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
 import { ChunkExtractor } from '@loadable/server';
 import config from '../config/webpack.dev';
@@ -62,9 +61,8 @@ app.use(passport.session());
 
 if (!isProduction) {
   app.use(webpackDevMiddleware(compiler, config.devServer));
-  app.use(webpackHotMiddleware(compiler));
   console.log('\n');
-  console.log('....Webpack Dev & Hot Middleware Enabled....');
+  console.log('....Webpack Dev Middleware Enabled....');
   console.log('\n');
 }
 

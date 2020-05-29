@@ -5,13 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   entry: {
-    main: [
-      'react-hot-loader/patch',
-      '@babel/register',
-      'webpack-hot-middleware/client?timeout=2000&reload=true',
-      'webpack/hot/only-dev-server',
-      './client/index.js',
-    ],
+    main: ['@babel/register', './client/index.js'],
   },
   mode: 'development',
   output: {
