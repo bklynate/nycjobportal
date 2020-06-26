@@ -43,7 +43,7 @@ const JobResultItem = props => {
     >
       <Link
         className={styles.jobListingURL}
-        onClick={async () => await handleOnClick(props)} //eslint-disable-line
+        onClick={() => handleOnClick(props)} //eslint-disable-line
         to={{
           pathname: `/job-listing/${jobID}?id=${jobID}&postingType=${postingType}`,
         }}
