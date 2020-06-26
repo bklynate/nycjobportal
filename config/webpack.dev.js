@@ -16,14 +16,10 @@ const config = {
   devtool: 'eval-cheap-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
   },
   devServer: {
     contentBase: 'dist',
     overlay: true,
-    hot: true,
     stats: {
       colors: true,
     },
@@ -79,7 +75,6 @@ const config = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {

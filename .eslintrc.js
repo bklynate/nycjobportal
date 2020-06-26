@@ -5,6 +5,7 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'no-undef': 'off',
+    'no-shadow': 1,
     'jsx-a11y/href-no-hash': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
     'react/forbid-prop-types': 2,

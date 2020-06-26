@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button } from '@chakra-ui/core';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import styles from './styles.scss';
 
 const sanitizeJobDescriptionText = jobDescriptionText => {
@@ -10,16 +12,15 @@ const applyToJobBaseURL =
   'https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteId=1&PostingSeq=1&';
 
 const JobListingPage = props => {
-  const { location } = props;
-  const { state } = location;
-  const { jobListing } = state || {};
+  const { singleJob } = props;
+
   const {
     agency = '',
-    jobID = '',
-    businessTitle = '',
-    jobCategory = '',
-    jobDescription = '',
-  } = jobListing || {};
+    job_id: jobID = '',
+    business_title: businessTitle = '',
+    job_category: jobCategory = '',
+    job_description: jobDescription = '',
+  } = singleJob || {};
 
   const lowercaseAgency = agency.toLowerCase();
 
@@ -45,13 +46,17 @@ const JobListingPage = props => {
   );
 };
 
-// const loadData = (store, request) => {
-//   // const { query } = request || {};
-//   // const { q: queryString } = query || {};
-//   // return store.dispatch(actions.fetchKeywordJobs(queryString));
-//   console.log('Here is the request :: ', { request})
-// };
+const mapStateToProps = state => {
+  const { singleJob } = state;
+  return { singleJob };
+};
 
-// export { loadData }
+const loadData = (store, request) => {
+  const { query } = request || {};
+  const { id, postingType } = query || {};
+  return store.dispatch(actions.fetchSingleJob(id, postingType));
+};
 
-export default JobListingPage;
+export { loadData };
+
+export default connect(mapStateToProps, actions)(JobListingPage);

@@ -54,7 +54,7 @@ exports[`JobResultItem optimal case should match snapshot 1`] = `
   >
     <a
       class="jobListingURL"
-      href="/job-listing/438977-Internal"
+      href="/job-listing/438977?id=438977&postingType=Internal"
     >
       <div
         class="emotion-8"

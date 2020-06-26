@@ -30,5 +30,5 @@ export const fetchSingleJob = (jobID, jobPostingType) => async dispatch => {
     jobPostingType,
   });
 
-  await dispatch({ type: FETCH_SINGLE_JOB, payload: response.data });
+  await dispatch({ type: FETCH_SINGLE_JOB, payload: response.data[0] });
 };

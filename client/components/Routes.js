@@ -6,10 +6,11 @@ import App from './App';
 import LandingPage from './LandingPage';
 
 import Form, { loadData as formLoadData } from './Form';
-import JobListingPage from './JobListingPage';
+import JobListingPage, {
+  loadData as jobListingPageLoadData,
+} from './JobListingPage';
 
 const NotFoundPage = loadable(() => import('./NotFoundPage'));
-// const JobListingPage = loadable(() => import('./JobListingPage'));
 
 export default [
   {
@@ -30,7 +31,7 @@ export default [
         path: '/job-listing/:id',
         exact: true,
         component: JobListingPage,
-        // loadData: jobListingPageLoadData,
+        loadData: jobListingPageLoadData,
       },
       {
         path: '*',

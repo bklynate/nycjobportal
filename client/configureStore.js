@@ -13,6 +13,7 @@ const configureStore = (req = { request: { cookies: {} } }) => {
 
   const preloadedState = {
     jobs: {},
+    singleJob: {},
     request: {
       cookies: req.request.cookies,
     },

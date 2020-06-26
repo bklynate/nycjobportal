@@ -11,12 +11,12 @@ describe('getJobs', () => {
   });
 
   it('successfully retrieves jobs', async () => {
-    const result = await getJobs();
+    const result = await getJobs({});
     expect(result.data).toMatchObject(getJobsResponse);
   });
 
   it('successfully retrieves jobs by search text', async () => {
-    const result = await getJobs(global.searchText);
+    const result = await getJobs({ keyword: global.searchText });
     expect(result.data).toMatchObject(getJobsBySearchResponse);
   });
 });
