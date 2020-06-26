@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Box, Badge, Text } from '@chakra-ui/core';
+import * as actions from '../../actions';
 import styles from './styles.scss';
 
 const formatFullTimePartTimeIndicator = fullTimePartTimeIndicator => {
@@ -22,20 +24,12 @@ const JobResultItem = props => {
     full_time_part_time_indicator: fullTimePartTimeIndicator,
     job_category: jobCategory,
     work_location: workLocation,
-    job_description: jobDescription,
   } = data;
 
-  const jobListing = {
-    agency,
-    jobID,
-    postingType,
-    businessTitle,
-    civilServiceTitle,
-    divisionWorkUnit,
-    fullTimePartTimeIndicator,
-    jobCategory,
-    workLocation,
-    jobDescription,
+  const handleOnClick = props => {
+    const { fetchSingleJob, data } = props;
+    const { job_id: jobID, posting_type: jobPostingType } = data;
+    fetchSingleJob(jobID, jobPostingType);
   };
 
   return (
@@ -49,11 +43,9 @@ const JobResultItem = props => {
     >
       <Link
         className={styles.jobListingURL}
+        onClick={async () => await handleOnClick(props)} //eslint-disable-line
         to={{
-          pathname: `/job-listing/${jobID}-${postingType}`,
-          state: {
-            jobListing,
-          },
+          pathname: `/job-listing/${jobID}?id=${jobID}&postingType=${postingType}`,
         }}
       >
         <Box p={5}>
@@ -96,4 +88,4 @@ const JobResultItem = props => {
   );
 };
 
-export default JobResultItem;
+export default connect(null, actions)(JobResultItem);

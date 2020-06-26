@@ -1,7 +1,6 @@
 {
   "presets": [["@babel/preset-env"], "@babel/preset-react"],
   "plugins": [
-    "react-hot-loader/babel",
     "@loadable/babel-plugin",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties",
