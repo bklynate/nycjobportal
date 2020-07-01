@@ -27,7 +27,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/polyfill": "^7.10.1",
+    "@babel/polyfill": "^7.10.4",
     "@babel/register": "^7.10.3",
     "@babel/runtime": "^7.10.3",
     "@chakra-ui/core": "^0.8.0",
