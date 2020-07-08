@@ -1,8 +1,8 @@
-# NYC JOB PORTAL
+# **NYC JOB PORTAL**
 
-This web application is built with Preact X, React, Redux, Webpack, Prettier, Eslint, Babel, and Express.
+This web application is server side rendered and built with Preact X, React, Redux, Webpack, Prettier, Eslint, Babel, and Express. 
 
-## Installation
+## **Installation**
 
 Clone the repo locally
 `git clone https://github.com/bklynate/nycjobportal.git` for https or `git clone git@github.com:bklynate/nycjobportal.git` for SSH
@@ -17,14 +17,13 @@ brew install mongodb-community
 brew services start mongodb/brew/mongodb-community
 ```
 
-## .ENV and Keys Setup
+## **.ENV and Keys Setup**
 
-**Links**
-
-- [NYC Open Data: NYC Jobs Data Set](https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t)
-- [Socrata Authentication](https://dev.socrata.com/docs/authentication.html)
-- [Socrata API Endpoints](https://dev.socrata.com/docs/endpoints.html)
-- [Google Developer Console](https://console.developers.google.com/)
+##### Important Links:
+[NYC Open Data: NYC Jobs Data Set](https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t)
+[Socrata Authentication](https://dev.socrata.com/docs/authentication.html)
+[Socrata API Endpoints](https://dev.socrata.com/docs/endpoints.html)
+[Google Developer Console](https://console.developers.google.com/)
 
 To run locally, you'll need to setup API Keys for Google OAuth2 and NYC OpenData. Create a .env in the root of the project
 
@@ -39,11 +38,15 @@ To run locally, you'll need to setup API Keys for Google OAuth2 and NYC OpenData
 
 _For more information on generating Google API keys follow the following guide_: [Using OAuth 2.0 to Access Google APIs](https://support.google.com/googleapi/answer/6158849?hl=en&ref_topic=7013279)
 
-## Build Scripts
+## **Build Scripts**
 
-### **Once you have secured all of the necessary API keys:**
+### **After securing all of the necessary API keys**
 
-- Build a **dev** version of the application by running `npm run dev`.
+Build a **dev** version of the application by running either:
+- `npm run dev`
+ **or**
+- `npm run build:client:dev:watch` `npm run build:server:dev:watch` and  `npm run dev-server` **in 3 separate terminal shells** for a reactive dev experience. _(Due to the npm package @loadable-components, which I am using for code splitting, not supporting hot module reloading this was the next best thing I could come up with at the time)_
+
 
 ####  **BEFORE BUILDING A PRODUCTION BUILD LOCALLY**
 Inside `config/webpack.server.js` you will need to uncomment the following lines:
@@ -59,14 +62,14 @@ plugins: [
     // new Dotenv(),
 ]
 ```
-- Build a **prod** version of the application by running `npm run prod`.
+Build a **production** version of the application by running `npm run prod`.
 
-*Don't forget to comment out those lines if you fork and decide to deploy this application to Heroku.*
+#### _**Don't forget to re-comment out those lines if you fork and decide to deploy this application to Heroku.**_
 
-## Contributing
+## **Contributing**
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
+## **License**
 
 [MIT](https://choosealicense.com/licenses/mit/)
