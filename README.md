@@ -25,7 +25,7 @@ brew services start mongodb/brew/mongodb-community
 [Socrata API Endpoints](https://dev.socrata.com/docs/endpoints.html)
 [Google Developer Console](https://console.developers.google.com/)
 
-To run locally, you'll need to setup API Keys for Google OAuth2 and NYC OpenData. Create a `.env` in the root of the project
+To run locally, you'll need to setup API Keys for Google OAuth2 and NYC OpenData. Run the command `cp .env.example .env`. You should have a `.env` file in the root of your project with these values:
 
 ```
   GOOGLE_CLIENT_ID='<Your GOOGLE_CLIENT_ID>'
@@ -35,6 +35,8 @@ To run locally, you'll need to setup API Keys for Google OAuth2 and NYC OpenData
   APIKEY='123' (NYCOpen Data Key Here)
   baseURL='http://localhost:5000'
 ```
+
+Update the example env values with your own.
 
 _For more information on generating Google API keys follow the following guide_: [Using OAuth 2.0 to Access Google APIs](https://support.google.com/googleapi/answer/6158849?hl=en&ref_topic=7013279)
 
