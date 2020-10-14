@@ -29,15 +29,15 @@ const compiler = webpack(config);
 const isProduction = process.env.NODE_ENV === 'production';
 
 const { PORT = 5000 } = process.env;
-const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/bp_db';
+// const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/bp_db';
 const cookieKey = process.env.COOKIE_KEY;
 
 /* ORDER MATTERS ! */
 app.use(express.static('dist'));
 
 mongoose.Promise = global.Promise;
-const mongoConfig = { useUnifiedTopology: true, useNewUrlParser: true };
-mongoose.connect(mongoUrl, mongoConfig);
+// const mongoConfig = { useUnifiedTopology: true, useNewUrlParser: true };
+// mongoose.connect(mongoUrl, mongoConfig);
 
 require('./models/User');
 require('./services/passport');

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Box } from '@chakra-ui/core';
 import JobResultItem from '../JobResultItem';
-import styles from './styles.scss';
 
 const renderResultsList = props => {
   const { data: jobs = [] } = props;
@@ -10,9 +9,7 @@ const renderResultsList = props => {
 };
 
 const SearchResultsList = props => (
-  <Box className={styles.jobResultsListContainer} my="2rem">
-    {renderResultsList(props)}
-  </Box>
+  <Box my="2rem">{renderResultsList(props)}</Box>
 );
 
 const mapStateToProps = state => {
