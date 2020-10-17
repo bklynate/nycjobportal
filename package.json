@@ -29,7 +29,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
-    "@babel/register": "^7.11.5",
+    "@babel/register": "^7.12.1",
     "@babel/runtime": "^7.11.2",
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.35",
